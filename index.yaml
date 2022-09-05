@@ -2,6 +2,28 @@ apiVersion: v1
 entries:
   podinfo:
   - apiVersion: v2
+    created: "2022-09-05T20:08:35.393625974Z"
+    dependencies:
+    - name: podinfo
+      repository: https://stefanprodan.github.io/podinfo
+      version: v6.2.0
+    description: A Weaveworks Helm chart for Application Promotion Podinfo
+    digest: c3a854b54b1de51533e4b1e65cb6d84054418df4b1996f16f928e3de5d4fbeb2
+    home: https://github.com/weavegitops/application-promotion-podinfo
+    keywords:
+    - podinfo
+    kubeVersion: '>=1.19.0-0'
+    maintainers:
+    - email: support@weave.works
+      name: Weaveworks
+    name: podinfo
+    sources:
+    - https://github.com/stefanprodan/podinfo
+    type: application
+    urls:
+    - https://github.com/weavegitops/application-promotion-podinfo/releases/download/podinfo-0.0.3/podinfo-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
     created: "2022-09-05T19:54:27.450484378Z"
     dependencies:
     - name: podinfo
@@ -23,4 +45,4 @@ entries:
     urls:
     - https://github.com/weavegitops/application-promotion-podinfo/releases/download/podinfo-0.0.2/podinfo-0.0.2.tgz
     version: 0.0.2
-generated: "2022-09-05T19:54:27.450490978Z"
+generated: "2022-09-05T20:08:35.393638474Z"
