@@ -3,13 +3,13 @@ name: Build docker image and push to ghcr.io
 on:
   push:
     branches:
-    - main
-    - 'cmd/**'
-    
+      - main
+      - 'cmd/**'
+
   pull_request:
     branches:
-    - main
-    - 'cmd/**'
+      - main
+      - 'cmd/**'
 
 env:
   REGISTRY: ghcr.io
@@ -78,4 +78,3 @@ jobs:
 #        createPR: true
 #        message: 'Update Image Version to ${{ env.VERSION }}'
 #        masterBranchName: main
-
