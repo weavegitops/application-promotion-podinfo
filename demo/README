@@ -1,7 +1,0 @@
-You can run these demo scripts to apply the changes you need to this repo during a demo instead of editing the files manually.
-
-Run the scripts in order to run each step of the demo.
-
-01-demo-prep.sh - prepares the demo and reminds you of which commands to run in another CLI window for the port-forwards
-02-make-dev-change.sh - makes edits to the files ready to build a new container
-03-post-demo-revert.sh - reverts the file edits to reset the demo
