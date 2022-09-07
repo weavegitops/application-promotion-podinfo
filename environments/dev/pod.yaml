@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: private-reg-demo
+  namespace: app-podinfo
+spec:
+  containers:
+  - name: private-reg-container-demo
+    image: ghcr.io/darrylweaver/application-promotion-podinfo:main
+  imagePullSecrets:
+  - name: ghcr-pull-image-creds
