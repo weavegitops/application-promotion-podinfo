@@ -1,9 +1,8 @@
----
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageUpdateAutomation
 metadata:
   name: podinfo-dev
-  namespace: flux-system
+  namespace: app-podinfo
 spec:
   git:
     checkout:
@@ -15,12 +14,11 @@ spec:
         name: fluxcdbot
       messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
     push:
-      branch: dev-test-promote
+      branch: main
   interval: 1m0s
   sourceRef:
     kind: GitRepository
     name: application-promotion-podinfo
   update:
-    path: ./image-automation/dev-test
+    path: ./environments/dev
     strategy: Setters
-
