@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: podinfod
-          image: darrylweaver/application-promotion-podinfo:main
+          image: ghcr.io/darrylweaver/application-promotion-podinfo:main
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
