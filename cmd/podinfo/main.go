@@ -41,7 +41,7 @@ func main() {
 	fs.String("ui-path", "./ui", "UI local path")
 	fs.String("ui-logo", "", "UI logo")
 	fs.String("ui-color", "#34577c", "UI color")
-	fs.String("ui-message", fmt.Sprintf("Hello, testing, testing greetings from podinfo container v%v", version.VERSION), "UI message")
+	fs.String("ui-message", fmt.Sprintf("Hello, salutations from podinfo container v%v", version.VERSION), "UI message")
 	fs.Bool("h2c", false, "allow upgrading to H2C")
 	fs.Bool("random-delay", false, "between 0 and 5 seconds random delay by default")
 	fs.String("random-delay-unit", "s", "either s(seconds) or ms(milliseconds")
