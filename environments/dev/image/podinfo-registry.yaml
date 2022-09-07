@@ -5,7 +5,7 @@ metadata:
   name: podinfo
   namespace: app-podinfo
 spec:
-  image: ghcr.io/darrylweaver/application-promotion-podinfo
+  image: ghcr.io/weavegitops/application-promotion-podinfo
   interval: 2m0s
   secretRef:
     name: ghcr-pull-image-creds
