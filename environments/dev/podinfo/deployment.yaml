@@ -24,55 +24,55 @@ spec:
         app: podinfo
     spec:
       imagePullSecrets:
-        - name: ghcr-pull-image-creds
+      - name: ghcr-pull-image-creds
       containers:
-        - name: podinfod
-          image: ghcr.io/weavegitops/application-promotion-podinfo:139779055750923407b494f78f81e75e0fb024f7-11 # {"$imagepolicy": "app-podinfo:podinfo-latest"}
-          imagePullPolicy: Always
-          ports:
-            - name: http
-              containerPort: 9898
-              protocol: TCP
-            - name: http-metrics
-              containerPort: 9797
-              protocol: TCP
-            - name: grpc
-              containerPort: 9999
-              protocol: TCP
-          command:
-            - ./podinfo
-            - '--port=9898'
-            - '--port-metrics=9797'
-            - '--grpc-port=9999'
-            - '--grpc-service-name=podinfo'
-            - '--level=info'
-            - '--random-delay=false'
-            - '--random-error=false'
-          env:
-            - name: PODINFO_UI_LOGO
-              value: https://raw.githubusercontent.com/pfcurtis/eks-gitops-workshop/master/weaveworks_transparent.gif
-          livenessProbe:
-            exec:
-              command:
-                - podcli
-                - check
-                - http
-                - localhost:9898/healthz
-            initialDelaySeconds: 5
-            timeoutSeconds: 5
-          readinessProbe:
-            exec:
-              command:
-                - podcli
-                - check
-                - http
-                - localhost:9898/readyz
-            initialDelaySeconds: 5
-            timeoutSeconds: 5
-          resources:
-            limits:
-              cpu: 2000m
-              memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 64Mi
+      - name: podinfod
+        image: ghcr.io/weavegitops/application-promotion-podinfo:b8b2f59d2c8680f0bb163b120e8672b399768b94-13 # {"$imagepolicy": "app-podinfo:podinfo-latest"}
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 9898
+          protocol: TCP
+        - name: http-metrics
+          containerPort: 9797
+          protocol: TCP
+        - name: grpc
+          containerPort: 9999
+          protocol: TCP
+        command:
+        - ./podinfo
+        - '--port=9898'
+        - '--port-metrics=9797'
+        - '--grpc-port=9999'
+        - '--grpc-service-name=podinfo'
+        - '--level=info'
+        - '--random-delay=false'
+        - '--random-error=false'
+        env:
+        - name: PODINFO_UI_LOGO
+          value: https://raw.githubusercontent.com/pfcurtis/eks-gitops-workshop/master/weaveworks_transparent.gif
+        livenessProbe:
+          exec:
+            command:
+            - podcli
+            - check
+            - http
+            - localhost:9898/healthz
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - podcli
+            - check
+            - http
+            - localhost:9898/readyz
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi
