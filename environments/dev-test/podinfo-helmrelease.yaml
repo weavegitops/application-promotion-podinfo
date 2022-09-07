@@ -19,7 +19,7 @@ spec:
         color: "#34577c"
         message: "Hi, this message is from the Helm values"
       image:
-        repository: ghcr.io/weavegitops/application-promotion-podinfo # {"$imagepolicy": "flux-system:podinfo-latest:name"}
-        tag: 0.0.1 # {"$imagepolicy": "flux-system:podinfo-latest:tag"}
+        repository: ghcr.io/weavegitops/application-promotion-podinfo # {"$imagepolicy": "app-podinfo:podinfo-latest:name"}
+        tag: main # {"$imagepolicy": "app-podinfo:podinfo-latest:tag"}
     
 
