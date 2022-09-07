@@ -23,10 +23,12 @@ spec:
       labels:
         app: podinfo
     spec:
+      imagePullSecrets:
+        - name: ghcr-pull-image-creds
       containers:
         - name: podinfod
           image: ghcr.io/darrylweaver/application-promotion-podinfo:main
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 9898
