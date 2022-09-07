@@ -17,7 +17,7 @@ spec:
     podinfo:
       ui:
         color: "#34577c"
-        message: "Hi, this message is from the Helm values"
+        message: "Hi, this message is from the Helm values for dev-test"
       image:
         repository: ghcr.io/weavegitops/application-promotion-podinfo # {"$imagepolicy": "app-podinfo:podinfo-latest:name"}
         tag: 98a128940ca3009dfb433e7e93793cb82fd42696-15 # {"$imagepolicy": "app-podinfo:podinfo-latest:tag"}
