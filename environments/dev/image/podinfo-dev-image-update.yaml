@@ -19,6 +19,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: application-promotion-podinfo
+    namespace: flux-system
   update:
     path: ./environments/dev
     strategy: Setters
