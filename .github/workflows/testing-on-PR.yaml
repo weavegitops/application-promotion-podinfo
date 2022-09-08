@@ -13,10 +13,6 @@ jobs:
   check_versions:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo The PR has been created
-        echo Running tests
-
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -48,14 +44,14 @@ jobs:
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-    - name: Build and do not push Docker image
-      uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-      with:
-        context: .
-        push: false
-        labels: ${{ steps.meta.outputs.labels }}
-        tags: |
-               ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.containerversion.outputs.VERSION  }}
+#    - name: Build and do not push Docker image
+#      uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+#      with:
+#        context: .
+#        push: false
+#        labels: ${{ steps.meta.outputs.labels }}
+#        tags: |
+#               ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.containerversion.outputs.VERSION  }}
 
     - name: Install Helm
       uses: azure/setup-helm@v1
@@ -86,8 +82,10 @@ jobs:
 
     - name: Run chart-testing (install)
       run: |
+        pwd 
+        cd charts
         pwd
-        ls -al
+        ls -l
         ct install --charts podinfo --debug --target-branch ${{ github.event.repository.default_branch }}
       if: steps.list-changed.outputs.changed == 'true'
 
