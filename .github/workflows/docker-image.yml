@@ -9,6 +9,9 @@ on:
       - 'cmd/**'
       - 'pkg/**'
 
+  release:
+    types: [published]
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
