@@ -1,0 +1,88 @@
+name: Release On Completion of PR Merge
+
+on:
+  pull_request:
+    branches:
+      - main
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  check_versions:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo The PR has been created
+        echo Running tests
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # important parameter
+
+    - name: Get Container Version
+      run: |
+        VERSION=$(grep "var VERSION" pkg/version/version.go | sed -e 's/^var VERSION = "//' -e 's/"$//')
+        echo "The container tag will be set to ${VERSION} once merged to main"
+        echo ::set-output name=VERSION::${VERSION}
+
+    - name: Get Helm Chart Version
+      run: |
+        HELM_VERSION=$(grep "^version" charts/podinfo/Chart.yaml | sed -e 's/^version:"//')
+        echo "The Helm Chart release will be set to ${HELM_VERSION} once merged to main"
+        echo ::set-output name=HELM_VERSION::${HELM_VERSION}
+
+    - name: Log in to the Container registry
+      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+      with:
+        registry: ${{ env.REGISTRY }}
+         username: ${{ github.actor }}
+         password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+    - name: Build and do not push Docker image
+      uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      with:
+        context: .
+        push: false
+        labels: ${{ steps.meta.outputs.labels }}
+        tags: |
+               ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.prep.outputs.VERSION  }}
+
+    - name: Install Helm
+      uses: azure/setup-helm@v1
+      with:
+        version: v3.9.2
+
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+
+    - name: Set up chart-testing
+      uses: helm/chart-testing-action@v2.2.1
+
+    - name: Run chart-testing (list-changed)
+      id: list-changed
+      run: |
+        changed=$(ct list-changed --target-branch ${{ github.event.repository.default_branch }})
+        if [[ -n "$changed" ]]; then
+          echo "::set-output name=changed::true"
+        fi
+
+    - name: Run chart-testing (lint)
+      run: ct lint --target-branch ${{ github.event.repository.default_branch }}
+
+    - name: Create kind cluster
+      uses: helm/kind-action@v1.2.0
+      if: steps.list-changed.outputs.changed == 'true'
+
+    - name: Run chart-testing (install)
+      run: ct install
+
