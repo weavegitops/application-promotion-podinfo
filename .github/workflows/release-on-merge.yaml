@@ -1,4 +1,4 @@
-name: Release On Completion of PR Merge
+name: Release Docker Container and Helm Chart
 
 on:
   pull_request:
