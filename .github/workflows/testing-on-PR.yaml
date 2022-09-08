@@ -86,4 +86,5 @@ jobs:
 
     - name: Run chart-testing (install)
       run: ct install
+      if: steps.list-changed.outputs.changed == 'true'
 
