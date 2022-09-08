@@ -85,6 +85,6 @@ jobs:
       if: steps.list-changed.outputs.changed == 'true'
 
     - name: Run chart-testing (install)
-      run: ct install --charts podinfo
+      run: ct install --charts podinfo --chart-dirs charts 
       if: steps.list-changed.outputs.changed == 'true'
 
