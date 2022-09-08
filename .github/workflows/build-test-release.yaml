@@ -1,4 +1,4 @@
-name: Check Versions, Docker Build & Push and Helm Install
+name: Check Versions,Build & Push Container, Test Helm and Release Helm Chart
 
 on:
   pull_request:
