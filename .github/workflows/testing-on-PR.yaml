@@ -1,4 +1,4 @@
-name: Check Versions, Docker Build and Helm Install
+name: Check Versions, Docker Build & Push and Helm Install
 
 on:
   pull_request:
@@ -44,7 +44,7 @@ jobs:
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-    - name: Build and do not push Docker image
+    - name: Build and push Docker image
       uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
       with:
         context: .
