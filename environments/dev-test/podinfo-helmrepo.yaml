@@ -2,9 +2,9 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: podinfo-helm-repo
-  namespace: app-podinfo
+  namespace: flux-system
 spec:
   interval: 1m0s
   url: https://weavegitops.github.io/application-promotion-podinfo/
   secretRef:
-    name: ghcr-pull-image-creds
+    name: git-provider-credentials
