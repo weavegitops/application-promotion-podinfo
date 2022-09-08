@@ -89,6 +89,6 @@ jobs:
         pwd
         ls -al
         ls -al /
-        ct install --charts podinfo --chart-dirs charts 
+        ct install --charts podinfo --chart-dirs ./charts --debug
       if: steps.list-changed.outputs.changed == 'true'
 
