@@ -4,4 +4,4 @@ podinfo:
     logo: "https://raw.githubusercontent.com/pfcurtis/eks-gitops-workshop/master/weaveworks_transparent.gif"
   image:
     repository: ghcr.io/weavegitops/application-promotion-podinfo
-    tag: 5.0.3
+    tag: 5.0.4
