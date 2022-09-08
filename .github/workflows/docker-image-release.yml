@@ -1,13 +1,8 @@
 name: Build docker image and push to ghcr.io
 
 on:
-  push:
-    branches:
-      - dev
-      - main
-    paths:
-      - 'cmd/**'
-      - 'pkg/**'
+  release:
+    types: [published]
 
 env:
   REGISTRY: ghcr.io
@@ -21,6 +16,16 @@ jobs:
       packages: write
 
     steps:
+      - name: Prepare
+        id: prep
+        run: |
+          VERSION=${GITHUB_SHA::8}
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            VERSION=${GITHUB_REF/refs\/tags\//}
+          fi
+          echo ::set-output name=BUILD_DATE::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          echo ::set-output name=VERSION::${VERSION}          
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -44,4 +49,4 @@ jobs:
           push: true
           labels: ${{ steps.meta.outputs.labels }}
           tags: |
-                    ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}-${{ github.run_number }}
+                    ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.prep.outputs.VERSION  }}
