@@ -6,5 +6,3 @@ metadata:
 spec:
   interval: 1m0s
   url: https://weavegitops.github.io/application-promotion-podinfo/
-  secretRef:
-    name: git-provider-credentials
