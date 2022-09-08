@@ -88,7 +88,6 @@ jobs:
       run: |
         pwd
         ls -al
-        ls -al /
-        ct install --charts podinfo --chart-dirs ./charts --debug
+        ct install --charts podinfo --debug --target-branch ${{ github.event.repository.default_branch }}
       if: steps.list-changed.outputs.changed == 'true'
 
