@@ -86,3 +86,15 @@ jobs:
         ct install --charts podinfo --target-branch ${{ github.event.repository.default_branch }} --chart-repos podinfo=https://stefanprodan.github.io/podinfo
       if: steps.list-changed.outputs.changed == 'true'
 
+    - name: Configure Git
+      run: |
+        git config user.name "GitHub Action"
+        git config user.email "action@github.com"
+
+    - name: Run chart-releaser
+      uses: helm/chart-releaser-action@v1.4.0
+      with:
+        charts_dir: charts
+        charts_repo_url: https://raw.githubusercontent.com/application-promotion-podinfo/gh-pages/
+      env:
+        CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
