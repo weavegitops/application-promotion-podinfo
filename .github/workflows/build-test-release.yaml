@@ -22,13 +22,22 @@ jobs:
       id: containerversion
       run: |
         VERSION=$(grep "var VERSION" pkg/version/version.go | sed -e 's/^var VERSION = "//' -e 's/"$//')
-        echo "The container tag will be set to ${VERSION} once merged to main"
+        echo "The container version will be set to ${VERSION}"
         echo ::set-output name=VERSION::${VERSION}
+        HELM_VERSION=$(grep "^version" charts/podinfo/Chart.yaml | sed -e 's/^version:"//')
+        echo "The Helm Chart version: ${HELM_VERSION}"
+        echo ::set-output name=HELM_VERSION::${HELM_VERSION}
+        HELM_CONTAINER_VERSION=$(grep "tag:" charts/podinfo/values/yaml | sed -e 's/.*tag: //')
+        cho "The Helm Chart Container version: ${HELM_CONTAINER_VERSION}"
+        if [ "$VERSION" != "$HELM_CONTAINER_VERSION" ]; then
+          echo "The Container version and Helm container version should be equal, exiting"
+          exit 1
+        fi
 
     - name: Helm Chart Version
       run: |
         HELM_VERSION=$(grep "^version" charts/podinfo/Chart.yaml | sed -e 's/^version:"//')
-        echo "The Helm Chart release will be set to ${HELM_VERSION} once merged to main"
+        echo "The Helm Chart version: ${HELM_VERSION}"
         echo ::set-output name=HELM_VERSION::${HELM_VERSION}
 
     - name: Log in to the Container registry
