@@ -1,4 +1,4 @@
-name: Build docker image and push to ghcr.io
+name: Release docker image and push to ghcr.io
 
 on:
   release:
