@@ -25,7 +25,8 @@ jobs:
       with:
         fetch-depth: 0 # important parameter
 
-    - name: Get Version
+    - name: Container Version
+      id: containerversion
       run: |
         VERSION=$(grep "var VERSION" pkg/version/version.go | sed -e 's/^var VERSION = "//' -e 's/"$//')
         echo "Version is set to ${VERSION}"
@@ -51,7 +52,7 @@ jobs:
         push: true
         labels: ${{ steps.meta.outputs.labels }}
         tags: |
-               ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.prep.outputs.VERSION  }}
+               ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.containerversion.outputs.VERSION  }}
 
     - name: Configure Git
       run: |
