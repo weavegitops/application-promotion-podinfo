@@ -23,6 +23,7 @@ jobs:
         fetch-depth: 0 # important parameter
 
     - name: Get Container Version
+      id: containerversion
       run: |
         VERSION=$(grep "var VERSION" pkg/version/version.go | sed -e 's/^var VERSION = "//' -e 's/"$//')
         echo "The container tag will be set to ${VERSION} once merged to main"
@@ -54,7 +55,7 @@ jobs:
         push: false
         labels: ${{ steps.meta.outputs.labels }}
         tags: |
-               ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.prep.outputs.VERSION  }}
+               ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.containerversion.outputs.VERSION  }}
 
     - name: Install Helm
       uses: azure/setup-helm@v1
