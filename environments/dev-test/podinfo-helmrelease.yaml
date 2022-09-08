@@ -20,4 +20,4 @@ spec:
         message: "Hi, this message is from the Helm values for dev-test"
       image:
         repository: ghcr.io/weavegitops/application-promotion-podinfo # {"$imagepolicy": "app-podinfo:podinfo-latest:name"}
-        tag: c3485cc4874a7e172540d36f2a1148b1f714eb5e-20 # {"$imagepolicy": "app-podinfo:podinfo-latest:tag"}
+        tag: e6e37e64c781559509872dadac01beb9c968ed7b-21 # {"$imagepolicy": "app-podinfo:podinfo-latest:tag"}
