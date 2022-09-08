@@ -4,4 +4,4 @@ podinfo:
     message: "Hi, this message is from the Helm values"
   image:
     repository: ghcr.io/weavegitops/application-promotion-podinfo
-    tag: 6.2.0
+    tag: main
