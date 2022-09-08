@@ -1,4 +1,4 @@
-name: Checking Versions, Running Docker Build and Helm Tests
+name: Check Versions, Docker Build and Helm Install
 
 on:
   pull_request:
@@ -22,13 +22,14 @@ jobs:
       with:
         fetch-depth: 0 # important parameter
 
-    - name: Get Container Version
+    - name: Container Version
+      id: containerversion
       run: |
         VERSION=$(grep "var VERSION" pkg/version/version.go | sed -e 's/^var VERSION = "//' -e 's/"$//')
         echo "The container tag will be set to ${VERSION} once merged to main"
         echo ::set-output name=VERSION::${VERSION}
 
-    - name: Get Helm Chart Version
+    - name: Helm Chart Version
       run: |
         HELM_VERSION=$(grep "^version" charts/podinfo/Chart.yaml | sed -e 's/^version:"//')
         echo "The Helm Chart release will be set to ${HELM_VERSION} once merged to main"
@@ -54,7 +55,7 @@ jobs:
         push: false
         labels: ${{ steps.meta.outputs.labels }}
         tags: |
-               ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.prep.outputs.VERSION  }}
+               ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.containerversion.outputs.VERSION  }}
 
     - name: Install Helm
       uses: azure/setup-helm@v1
