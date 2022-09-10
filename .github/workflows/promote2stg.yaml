@@ -1,4 +1,4 @@
-name: promotion
+name: promotion to staging
 on:
   repository_dispatch:
     types:

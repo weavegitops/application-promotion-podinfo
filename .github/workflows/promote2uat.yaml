@@ -1,4 +1,4 @@
-name: promotion
+name: promotion to UAT
 on:
   repository_dispatch:
     types:
