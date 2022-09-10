@@ -20,7 +20,7 @@ metadata:
   namespace: flux-system
 spec:
   providerRef:
-    name: github-app-podinfo
+    name: github-dispatch-app-podinfo
   summary: "env=uat"
   eventSeverity: info
   eventSources:
