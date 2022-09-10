@@ -32,6 +32,10 @@ jobs:
         git config user.name "GitHub Action"
         git config user.email "action@github.com"
 
+    - name: add podinfo source repo
+      run: |
+        helm repo add podinfo-src https://stefanprodan.github.io/podinfo
+
     - name: Run chart-releaser
       uses: helm/chart-releaser-action@v1.4.0
       with:
