@@ -2,7 +2,7 @@ apiVersion: v2
 name: podinfo
 description: A Weaveworks Helm chart for Application Promotion Podinfo
 type: application
-version: 1.0.7
+version: 1.0.8
 dependencies:
   - name: podinfo
     version: "v6.2.0"
@@ -12,7 +12,7 @@ home: https://github.com/weavegitops/application-promotion-podinfo
 sources:
   - https://github.com/stefanprodan/podinfo
 keywords:
-- podinfo
+  - podinfo
 maintainers:
   - name: Weaveworks
     email: support@weave.works
