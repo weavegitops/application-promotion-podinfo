@@ -41,7 +41,7 @@ jobs:
           branch: podinfo-promotion-uat
           delete-branch: true
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: Update podinfo to v${{ steps.dev-test.outputs.version }}
-          title: Promote podinfo release to v${{ steps.dev-test.outputs.version }}
+          commit-message: Update podinfo to v${{ steps.dev-test.outputs.version }} for UAT
+          title: Promote podinfo release to v${{ steps.dev-test.outputs.version }} for UAT
           body: |
-            Promote podinfo release on uat to v${{ steps.dev-test.outputs.version }}
+            Promote podinfo release to v${{ steps.dev-test.outputs.version }} for UAT

@@ -41,7 +41,7 @@ jobs:
           branch: podinfo-promotion-stg
           delete-branch: true
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: Update podinfo to v${{ steps.uat.outputs.version }}
-          title: Promote podinfo release to v${{ steps.uat.outputs.version }}
+          commit-message: Update podinfo to v${{ steps.uat.outputs.version }} on stg
+          title: Promote podinfo release to v${{ steps.uat.outputs.version }} on stg
           body: |
-            Promote podinfo release on stg to v${{ steps.uat.outputs.version }}
+            Promote podinfo release to v${{ steps.uat.outputs.version }} on stg
