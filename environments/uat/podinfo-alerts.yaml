@@ -1,0 +1,33 @@
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Alert
+metadata:
+  name: podinfo-kustomize-sync
+  namespace: flux-system
+spec:
+  providerRef:
+    name: github-app-podinfo
+  summary: "env=uat"
+  eventSeverity: info
+  eventSources:
+    - kind: Kustomization
+      name: app-promo-podinfo-uat
+      namespace: flux-system
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Alert
+metadata:
+  name: podinfo-dispatch
+  namespace: flux-system
+spec:
+  providerRef:
+    name: github-app-podinfo
+  summary: "env=uat"
+  eventSeverity: info
+  eventSources:
+    - kind: HelmRelease
+      name: podinfo
+      namespace: app-podinfo
+  exclusionList:
+    - ".*upgrade.*has.*started"
+    - ".*is.*not.*ready"
+    - "^Dependencies.*"
