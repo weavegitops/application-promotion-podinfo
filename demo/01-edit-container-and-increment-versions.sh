@@ -43,9 +43,10 @@ echo "Current Helm chart version: $HELM_VERSION"
 export HELM_NEXT=$(echo ${HELM_VERSION} | awk -F. -v OFS=. '{$NF += 1 ; print}')
 yq eval '.version=env(HELM_NEXT)' -i ../charts/podinfo/Chart.yaml
 echo "Helm chart version set to: ${HELM_NEXT}"
-exit
-echo "git add and commit changes"
+echo
+echo "Next we create the git repo branch and push to the repo"
 read -n1 -s
+echo "git add and commit changes"
 git checkout -b demo-podinfo-updates
 git add ../
 git commit -m "Update container to version ${NEXTVERSION} and Helm chart to version ${HELM_NEXT}"
@@ -60,7 +61,7 @@ echo "When this passes the tests, merge the change into main"
 echo "This will trigger the Helm release process and promote across the environments via PRs you have to approve."
 echo
 echo "To display the progress open 5 browser windows for each of the environments:"
-echo Demo2 links:
+echo "Demo2 links:"
 echo "dev - http://172.16.20.211/podinfo"
 echo "dev-test - http://172.16.20.212/podinfo"
 echo "uat - http://172.16.20.213/podinfo"
