@@ -29,6 +29,7 @@ echo $NEXTVERSION
 grep -v VERSION ../pkg/version/version.go > version.go.edited
 echo "var VERSION = \"${NEXTVERSION}\"" >> version.go.edited
 cp version.go.edited ../pkg/version/version.go
+rm -f version.go.edited
 echo
 echo "Now it looks like this:"
 cat ../pkg/version/version.go
