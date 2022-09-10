@@ -10,7 +10,7 @@ spec:
   eventSeverity: info
   eventSources:
     - kind: Kustomization
-      name: app-promo-podinfo-stg
+      name: app-promo-podinfo-prod
       namespace: flux-system
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta1
