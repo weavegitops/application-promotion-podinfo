@@ -2,6 +2,44 @@ You can run these demo scripts to apply the changes you need to this repo during
 
 Run the scripts in order to run each step of the demo.
 
-01-demo-prep.sh - prepares the demo and reminds you of which commands to run in another CLI window for the port-forwards
-02-make-dev-change.sh - makes edits to the files ready to build a new container
-03-post-demo-revert.sh - reverts the file edits to reset the demo
+You only have 1 script to run that just edits the version number of the container and helm chart and pushes a branch to the git repo for you.
+
+Run:
+./01-edit-container-and-increment-versions.sh
+
+This will show snipets of files, edits made, version numbers incremented and create a PR for you.
+The PR will then trigger the CI tests to run on the PR and show if the tests complete and a new docker container can be built.
+If the helm chart has been changed, it will also test the deployment of the helm chart.
+This process takes up to 5 minutes to complete.
+
+Once all tests pass on the PR, it can be merged to main.
+
+This will trigger the release process across the environments.
+
+Demo2
+dev - http://172.16.20.211/podinfo
+dev-test - http://172.16.20.212/podinfo
+uat - http://172.16.20.213/podinfo
+stg - http://172.16.20.214/podinfo
+prod - http://172.16.20.215/podinfo
+
+The dev cluster is updated by an Image Automation Controller that pushes a git commit to deploy the new container from every push to a branch.
+This deploys the latest container each time the developer pushes his code to any branch (except main).
+
+When the developer is ready to release the new version, he is happy with his changes.
+He then releases the container and updates the default container version for the helm chart and releases the helm chart.
+
+On a release of a new helm chart the dev-test environment will automatically pull the new helm chart and upgrade it.
+If the upgade succeeds it will use a githubdispatch to tell the git repo that it has completed the deployment.
+This triggers a github action to promote the exact version number of the helm chart to the UAT environment cluster.
+This is a PR and has to be approved to deploy it.
+
+Once it is deployed the same process occurs with a PR being made to deploy to the stage env cluster.
+This is approved, gets deployed and creates another PR to deploy into production.
+Once the last PR is approved the helm chart and new container reach production.
+
+Known issues: 
+The small ticks that show dpeloyment on each cluster environment only refer to the kustomizations being synced to the cluster.
+It does not show helm chart successful deployment.
+If there is a problem with the helm chart deployment the kustomization will still complete and give a green tick on the commit anyway.
+However, a PR will not be created until the Helm chart deploys correctly.
