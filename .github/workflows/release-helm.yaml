@@ -1,0 +1,41 @@
+name: Release Helm Chart
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  release_helm_chart:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # important parameter
+
+    - name: Install Helm
+      uses: azure/setup-helm@v1
+      with:
+        version: v3.9.2
+
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+
+    - name: Configure Git
+      run: |
+        git config user.name "GitHub Action"
+        git config user.email "action@github.com"
+
+    - name: Run chart-releaser
+      uses: helm/chart-releaser-action@v1.4.0
+      with:
+        charts_dir: charts
+        charts_repo_url: https://raw.githubusercontent.com/application-promotion-podinfo/gh-pages/
+      env:
+        CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"

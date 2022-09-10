@@ -2,6 +2,8 @@ name: Build docker image and push to ghcr.io
 
 on:
   push:
+    branches-ignore:
+      - main
     paths:
       - 'cmd/**'
       - 'pkg/**'
