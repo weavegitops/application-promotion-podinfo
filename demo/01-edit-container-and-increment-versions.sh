@@ -52,7 +52,7 @@ git checkout -b demo-podinfo-updates
 git add ../
 git commit -m "Update container to version ${NEXTVERSION} and Helm chart to version ${HELM_NEXT}"
 echo "git push changes to the repository"
-git push
+git push --set-upstream origin demo-podinfo-updates
 echo "The dev-test environment will receive this change automatically"
 echo "Create a PR to main from the branch demo-podinfo-updates in the github repo here:"
 echo "https://github.com/weavegitops/application-promotion-podinfo"
