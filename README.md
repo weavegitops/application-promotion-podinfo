@@ -35,7 +35,7 @@ Approve and merge and the production deployment is completed.
 
 You can show the podinfo application from each of the clusters to visibly show the progressing versions of the app.
 
-##Demo 2
+## Demo 2
 - dev - app-promo-dev11 - http://172.16.20.211/podinfo
 - dev-test - app-promo-dev-test12 http://172.16.20.212/podinfo
 - uat - app-promo-uat13 - http://172.16.20.213/podinfo
