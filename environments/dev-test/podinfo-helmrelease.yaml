@@ -16,5 +16,4 @@ spec:
   values:
     podinfo:
       ui:
-        color: "#34577c"
         message: "Hi, this message is from the Helm values for dev-test"
