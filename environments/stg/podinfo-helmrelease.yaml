@@ -16,4 +16,4 @@ spec:
   values:
     podinfo:
       ui:
-        message: "Hello, greetings from podinfo"
+        message: "Hello, greetings from podinfo on stage"
