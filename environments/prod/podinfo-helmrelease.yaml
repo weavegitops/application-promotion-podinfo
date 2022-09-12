@@ -17,3 +17,4 @@ spec:
     podinfo:
       ui:
         message: "Hello, greetings from podinfo"
+        color: ""
