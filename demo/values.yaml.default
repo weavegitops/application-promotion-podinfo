@@ -1,7 +1,0 @@
-podinfo:
-  ui:
-    message: "Hi, this the helm default message"
-    logo: "https://raw.githubusercontent.com/stefanprodan/podinfo/gh-pages/cuddle_clap.gif"
-  image:
-    repository: ghcr.io/weavegitops/application-promotion-podinfo
-    tag: 5.1.1
