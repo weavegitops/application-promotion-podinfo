@@ -23,6 +23,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Policy Check
+        uses: magalixcorp/magalix-action@main
+        with:
+          webhook: https://policy.weave.works/api/v1/kubeguard/f5e76f4f-938e-4af2-91ad-9698030224ef/40cbaa31-65d2-4798-bca2-3df16f45c339
+          auto-remediation: false
+
       - name: Log in to the Container registry
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
