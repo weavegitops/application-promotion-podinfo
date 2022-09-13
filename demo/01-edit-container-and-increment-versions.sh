@@ -50,6 +50,11 @@ git add ../
 git commit -m "Update container to version ${NEXTVERSION} and Helm chart to version ${HELM_NEXT}"
 echo "git push changes to the repository"
 git push --set-upstream origin demo-podinfo-updates
+git checkout main
+git branch -d demo-podinfo-updates
+echo
+echo
+echo "============================================================================================================="
 echo "The dev and dev-test environment will receive this change automatically"
 echo "To promote this to the UAT environment:"
 echo "Create a PR to main from the branch demo-podinfo-updates in the github repo here:"
