@@ -1,7 +1,4 @@
 podinfo:
-  ui:
-    message: "Hi, this message is from the default Helm values "
-    logo: "https://raw.githubusercontent.com/pfcurtis/eks-gitops-workshop/master/weaveworks_transparent.gif"
   image:
     repository: ghcr.io/weavegitops/application-promotion-podinfo
     tag: 5.1.1
