@@ -1,11 +1,15 @@
+# Application-promotion-podinfo demo
+
+This demo repository is used to demonstrate how application promotion can work with flux and Weave Gitops.
+
+## Quickstart
+
 You can run these demo scripts to apply the changes you need to this repo during a demo instead of editing the files manually.
 
-Run the scripts in order to run each step of the demo.
-
-You only have 1 script to run that just edits the version number of the container and helm chart and pushes a branch to the git repo for you.
-
+You only have 1 script to run that just edits the color of the background, the version number of the container and helm chart and pushes a branch to the git repo for you.
+The script outputs comments so you can run it during a demo and it tells you what it is doing.
 Run:
-./01-edit-container-and-increment-versions.sh
+    ./01-edit-container-and-increment-versions.sh
 
 This will show snipets of files, edits made, version numbers incremented and create a PR for you.
 The PR will then trigger the CI tests to run on the PR and show if the tests complete and a new docker container can be built.
@@ -16,22 +20,45 @@ Once all tests pass on the PR, it can be merged to main.
 
 This will trigger the release process across the environments.
 
-Demo2
+###Demo2
 dev - http://172.16.20.211/podinfo
 dev-test - http://172.16.20.212/podinfo
 uat - http://172.16.20.213/podinfo
 stg - http://172.16.20.214/podinfo
 prod - http://172.16.20.215/podinfo
 
-The dev cluster is updated by an Image Automation Controller that pushes a git commit to deploy the new container from every push to a branch.
-This deploys the latest container each time the developer pushes his code to any branch (except main).
+## Demo Process
 
-When the developer is ready to release the new version, he is happy with his changes.
+Explain about the developer that wants a fast iteration for code they are writing in a feature branch.
+They want to see the results of their changes quickly and easily without going through a formal release process.
+The next step is to release the changes by going through a more formal process of releasing and testing.
+The release promotion process is gated by approvals for uat,stg & prod.
+
+Whenever there is a push to any branch the github action runs to build a new container.  
+The dev cluster runs the gitops Image Automation Controller, this watches the container registry for the latest container version.
+When it sees a new tag version in the registry it pushes a change to the repo to update the image tag of the Podinfo Deployment.
+This deploys the latest container each time the developer pushes his code to any branch (except main).
+In order to make changes to the container code, edit the file:
+cmd/podinfo/main.go
+Then push to the repo to update the container in the dev environment from the feature branch.
+
+When the developer is ready to release the new version.
 He then releases the container and updates the default container version for the helm chart and releases the helm chart.
+To edit the version number of the container when released, edit the file:
+pkg/version/version.go
+To release this container version with the Helm chart add the same tag version to the file:
+charts/podinfo/values.yaml
+And also to relase the helm chart increment the version of the chart in:
+charts/podinfo/Chart.yaml
+Create a PR to main from your feature branch.
+This will trigger a build of the container and will be tagged with the version in pkg/version/version.go.
+The helm chart will be linted, tested on a kind cluster and the versions checked.
+When the tests have passed, merge the change into the main branch.
+This will trigger the chart releaser, this will release the Helm chart to the Helm repo on github.
 
 On a release of a new helm chart the dev-test environment will automatically pull the new helm chart and upgrade it.
 If the upgade succeeds it will use a githubdispatch to tell the git repo that it has completed the deployment.
-This triggers a github action to promote the exact version number of the helm chart to the UAT environment cluster.
+This triggers a github action to promote the exact same version number of the helm chart to the UAT environment cluster.
 This is a PR and has to be approved to deploy it.
 
 Once it is deployed the same process occurs with a PR being made to deploy to the stage env cluster.
@@ -39,7 +66,9 @@ This is approved, gets deployed and creates another PR to deploy into production
 Once the last PR is approved the helm chart and new container reach production.
 
 Known issues: 
-The small ticks that show dpeloyment on each cluster environment only refer to the kustomizations being synced to the cluster.
+The small ticks that show deployment on each cluster environment only refer to the kustomizations being synced to the cluster.
 It does not show helm chart successful deployment.
 If there is a problem with the helm chart deployment the kustomization will still complete and give a green tick on the commit anyway.
 However, a PR will not be created until the Helm chart deploys correctly.
+
+
