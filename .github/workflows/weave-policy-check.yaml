@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - uses: actions/checkout@v3
+
       - run: |
           mkdir sarif-output
-
-      - uses: actions/checkout@v3
 
       - name: Policy Scan Helm Charts
         uses: weaveworks/weave-action@v1
