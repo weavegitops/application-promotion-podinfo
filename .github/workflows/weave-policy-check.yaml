@@ -14,23 +14,15 @@ jobs:
       - run: |
           mkdir sarif-output
 
-      - name: Policy Scan Helm Charts
-        uses: weaveworks/weave-action@v1
-        with:
-          path: charts
-          policies-path: policies
-          remediate: true
-          sarif-file: sarif-output/helm-results.sarif
-
       - name: Policy Scan Deployment Manifests
         uses: weaveworks/weave-action@v1
         with:
           path: environments
           policies-path: policies
           remediate: true
-          sarif-file: sarif-output/env-results.sarif
+          sarif-file: results.sarif
 
       - uses: github/codeql-action/upload-sarif@v2
         if: always()
         with:
-          sarif_file: sarif-output
+          sarif_file: results.sarif
