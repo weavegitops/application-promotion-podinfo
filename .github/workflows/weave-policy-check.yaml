@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  helm-check:
+  weave-policy-checks:
     runs-on: ubuntu-latest
     steps:
 
