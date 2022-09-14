@@ -15,7 +15,7 @@ spec:
       version: '>=0.0.3'
   values:
     podinfo:
-      replicas: 1
+      replicaCount: 1
       ui:
         message: "Hi, this message is from the Helm values for dev-test"
         color: ""
