@@ -14,7 +14,7 @@ There are 5 environments:
 
 Commits should be done in a feature branch not in the main branch.
 
-Each push by the developer of files in /pkg or /cmd will trigger a build of the container and deploy to the 'dev' cluster.
+Each push by the developer of files in /pkg or /cmd will trigger a temporary build of the container and deploy to the 'dev' cluster.
 This happens quickly, within 2-4 minutes.
 
 After the developer is ready to release their changes, they modify the Helmchart in /charts/podinfo/Chart.yaml
