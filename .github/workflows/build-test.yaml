@@ -24,10 +24,10 @@ jobs:
         VERSION=$(grep "var VERSION" pkg/version/version.go | sed -e 's/^var VERSION = "//' -e 's/"$//')
         echo "The container version will be set to ${VERSION}"
         echo ::set-output name=VERSION::${VERSION}
-        HELM_VERSION=$(grep "^version" charts/podinfo/Chart.yaml | sed -e 's/^version:"//')
+        HELM_VERSION=$(cat charts/podinfo/Chart.yaml | yq .version)
         echo "The Helm Chart version: ${HELM_VERSION}"
         echo ::set-output name=HELM_VERSION::${HELM_VERSION}
-        HELM_CONTAINER_VERSION=$(grep "tag:" charts/podinfo/values.yaml | sed -e 's/.*tag: //')
+        HELM_CONTAINER_VERSION=$(cat charts/podinfo/values.yaml | yq .image.tag)
         echo "The Helm Chart Container version: ${HELM_CONTAINER_VERSION}"
         if [ "$VERSION" != "$HELM_CONTAINER_VERSION" ]; then
           echo "The Container version and Helm container version should be equal, exiting"
