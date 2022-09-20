@@ -2,8 +2,8 @@
 
 replicaCount: 3
 logLevel: info
-host: #0.0.0.0
-backend: #http://backend-podinfo:9898/echo
+host:  # 0.0.0.0
+backend:  # http://backend-podinfo:9898/echo
 backends: []
 
 image:
@@ -16,7 +16,6 @@ ui:
   message: ""
   logo: ""
 
-# failure conditions
 faults:
   delay: false
   error: false
@@ -25,7 +24,6 @@ faults:
   testFail: false
   testTimeout: false
 
-# Kubernetes Service settings
 service:
   enabled: true
   annotations: {}
@@ -38,11 +36,9 @@ service:
   nodePort: 31198
   hostPort:
 
-# enable h2c protocol (non-TLS version of HTTP/2)
 h2c:
   enabled: false
 
-# enable tls on the podinfo service
 tls:
   enabled: false
   secretName:
@@ -50,7 +46,6 @@ tls:
   port: 9899
   hostPort:
 
-# create a certificate manager certificate (cert-manager required)
 certificate:
   create: false
   issuerRef:
@@ -59,58 +54,27 @@ certificate:
   dnsNames:
     - podinfo
 
-# metrics-server add-on required
 hpa:
   enabled: false
-  maxReplicas: 10
-  # average total CPU usage per pod (1-100)
-  cpu:
-  # average memory usage per pod (100Mi-1Gi)
-  memory:
-  # average http requests per second per pod (k8s-prometheus-adapter)
-  requests:
 
-# Redis address in the format tcp://<host>:<port>
 cache: ""
-# Redis deployment
 redis:
   enabled: false
-  repository: redis
-  tag: 6.0.8
 
 serviceAccount:
-  # Specifies whether a service account should be created
   enabled: false
-  name:
 
-# set container security context
 securityContext: {}
 
 ingress:
   enabled: false
-  className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: podinfo.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
 
 linkerd:
   profile:
     enabled: false
 
-# create Prometheus Operator monitor
 serviceMonitor:
   enabled: false
-  interval: 15s
-  additionalLabels: {}
 
 resources:
   limits:
