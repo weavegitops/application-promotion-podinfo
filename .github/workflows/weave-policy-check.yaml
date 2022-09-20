@@ -18,6 +18,7 @@ jobs:
         uses: weaveworks/weave-action@v1
         with:
           path: charts
+          helm-values-file: charts/podinfo/values.yaml
           policies-path: policies
           remediate: true
           sarif-file: sarif-output/helm-results.sarif
