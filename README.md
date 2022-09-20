@@ -1,37 +1,43 @@
 
 # Podinfo Application Source Repository
 
-This is the source code repository for the application. This is a monorepo, so all the environments are in the main branch.  The environments are referenced by flux kustomizations from each cluster to the /environments/NAME directory.
+This is the source code repository for the application. 
 
-There are 5 environments, 'dev' and 'dev-test', for the developers use, uat or user acceptance testing, used by the testers, staging (managed like production) and production.
+This is a monorepo, so all the environments are in the main branch.  
+The environments are referenced by flux kustomizations from each cluster to the /environments/NAME directory.
 
-Commits should be done in a feature branch.
+There are 5 environments:
+- 'dev' and 'dev-test', for the developers use,
+- 'uat' or user acceptance testing, used by the testers,
+- 'stg' or staging (managed like production) and
+- 'prod' or production.
 
-Each push by the developer of files in /pkg or /cmd will trigger a build of the container.
+Commits should be done in a feature branch not in the main branch.
 
-The dev cluster has Image Automation which watches the ghcr.io container registry for the latest tag.  If there is a new tag, it pushes changes directly to main to update the tag for the Podinfo Deployment.yaml manifest, which flux syncs and it downloades the new cluster image.  This happens quickly, within 2-4 minutes.
+Each push by the developer of files in /pkg or /cmd will trigger a build of the container and deploy to the 'dev' cluster.
+This happens quickly, within 2-4 minutes.
 
-After the developer is ready to release his changes, he creates a new Helmchart and increments the version number and increments the version of the container to include in the release.
+After the developer is ready to release their changes, they modify the Helmchart in /charts/podinfo/Chart.yaml
+- incrementing the version number of the chart
+- increments the version of the container to include in the release.
 
 A PR from the feature branch is then made against the main branch, this triggers the CI testing.
+The CI tests then:
+- builds the release container version
+- Checks the version numbers were incremented
+- Runs a Kind cluster and installs the new Helm chart with the new container and checks it installs correctly.
 
-This checks if the versions have been incremented and builds the docker container to the new tagged version, tests the helm chart install succeeds.
+When the tests pass, the PR can be approved and merged to main.
+This runs the chart-releaser process to release the Helm Chart in the github repository, which acts as a Helm repository.
 
-When the tests pass, the PR can be approved and merged.
+The dev-test cluster detects the new chart in the Helm Repository and installs it automatically.
 
-Once merges the Helm release process is triggered, which releases the Helm Chart.
+Then each cluster sends a webhook to the github repo when the Helm chart is 'ready'.
+This creates a PR for each environment cluster to promote across each one.
+i.e.
 
-The dev-test cluster will automatically detects the new chart and upgrade it automatically.
+dev-test installs Helm chart --> PR created for 'uat' --> Approve --> Deploys chart to 'uat' --> PR created for 'stg' --> Approve --> Deploys chart to 'stg' --> PR created for 'prod' --> Approve --> Deploys chart to 'prod' 
 
-The dev-test cluster is running a github provider for the notification controller that sends a githubdispatch event to github once the helm chart upgrade is completed.
-
-The github action is triggered that creates a PR to the Helm Chart version on the UAT cluster.
-
-Once the PR is approved and merged, the UAT cluster receives the new helm chart and container, this creates another PR to the stg environment.
-
-Once the PR is approved the Helm Chart deploys to stg and creates the last PR to prod.
-
-Approve and merge and the production deployment is completed.
 
 You can show the podinfo application from each of the clusters to visibly show the progressing versions of the app.
 
