@@ -9,5 +9,5 @@ maintainers:
   - name: Weaveworks
     email: support@weave.works
 sources:
-- https://github.com/weavegitops/application-promotion-podinfo
+  - https://github.com/weavegitops/application-promotion-podinfo
 kubeVersion: ">=1.19.0-0"
