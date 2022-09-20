@@ -17,7 +17,7 @@ jobs:
       - name: Policy Scan Helm Chart
         uses: weaveworks/weave-action@v1
         with:
-          path: charts
+          path: charts/podinfo/
           helm-values-file: charts/podinfo/values.yaml
           policies-path: policies
           remediate: true
