@@ -119,7 +119,11 @@ echo "To promote this to the prod environment:"
 echo "Approve the PR to deploy to prod in the github repo here:"
 echo "https://github.com/weavegitops/application-promotion-podinfo/pulls"
 echo 
-echo "Setting branch back to main and pulling changes"
+echo "The demo is complete."
+echo
+echo "Press a key to reset your git environment"
+read -n1 -s
 git checkout main
 git pull
-echo "The demo is now completed"
+git branch -d demo-podinfo-updates
+
