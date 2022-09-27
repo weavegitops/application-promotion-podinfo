@@ -63,7 +63,7 @@ cat ../pkg/version/version.go
 echo
 read -n1 -s
 echo "We also need to set the version of the container in the helm chart values"
-yq eval '.podinfo.image.tag=env(NEXTVERSION)' -i ../charts/podinfo/values.yaml
+yq eval '.image.tag=env(NEXTVERSION)' -i ../charts/podinfo/values.yaml
 echo "Container tag set in the helm chart to ${NEXTVERSION}"
 echo
 echo "Then we increment the version of the helm chart to release the new Helm chart with the new podinfo container"
