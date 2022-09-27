@@ -1,6 +1,17 @@
 
 # Podinfo Application Source Repository
 
+## Quickstart
+
+If you want to get started quickly you can run the demo by using a script at the CLI:
+```
+cd demo
+./01-edit-container-and-increment-versions.sh
+```
+Read the instructions and follow the prompts, press a key to continue the script.
+
+## Introduction
+
 This is the source code repository for the application. 
 
 This is a monorepo, so all the environments are in the main branch.  
