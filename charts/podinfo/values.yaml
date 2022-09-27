@@ -1,21 +1,17 @@
 # Default values for podinfo.
-
 replicaCount: 3
 logLevel: info
-host:  # 0.0.0.0
-backend:  # http://backend-podinfo:9898/echo
+host: # 0.0.0.0
+backend: # http://backend-podinfo:9898/echo
 backends: []
-
 image:
   repository: ghcr.io/weavegitops/application-promotion-podinfo
-  tag: 5.1.5
+  tag: 5.1.6
   pullPolicy: IfNotPresent
-
 ui:
   color: "#34577c"
   message: ""
   logo: ""
-
 faults:
   delay: false
   error: false
@@ -23,7 +19,6 @@ faults:
   unready: false
   testFail: false
   testTimeout: false
-
 service:
   enabled: true
   annotations: {}
@@ -35,17 +30,14 @@ service:
   grpcService: podinfo
   nodePort: 31198
   hostPort:
-
 h2c:
   enabled: false
-
 tls:
   enabled: false
   secretName:
   certPath: /data/cert
   port: 9899
   hostPort:
-
 certificate:
   create: false
   issuerRef:
@@ -53,39 +45,27 @@ certificate:
     name: self-signed
   dnsNames:
     - podinfo
-
 hpa:
   enabled: false
-
 cache: ""
 redis:
   enabled: false
-
 serviceAccount:
   enabled: false
-
 securityContext: {}
-
 ingress:
   enabled: false
-
 linkerd:
   profile:
     enabled: false
-
 serviceMonitor:
   enabled: false
-
 resources:
   limits:
   requests:
     cpu: 1m
     memory: 16Mi
-
 nodeSelector: {}
-
 tolerations: []
-
 affinity: {}
-
 podAnnotations: {}
