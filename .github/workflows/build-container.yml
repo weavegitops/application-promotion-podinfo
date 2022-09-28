@@ -52,8 +52,8 @@ jobs:
           propertyPath: 'spec.template.spec.containers[0].image'
           value: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}-${{ github.run_number }}
           branch: main
-          targetBranch: main
+          commitChange: true
           createPR: false
-          message: 'Update Image Version to ${{ env.VERSION }} to dev'
+          message: 'Update Image Version to ${{ github.sha }}-${{ github.run_number }} to dev'
           masterBranchName: main
 
