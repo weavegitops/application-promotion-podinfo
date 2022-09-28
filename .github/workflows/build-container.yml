@@ -51,7 +51,7 @@ jobs:
           valueFile: 'environments/dev/podinfo/deployment.yaml'
           propertyPath: 'spec.template.spec.containers[0].image'
           value: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}-${{ github.run_number }}
-          branch: main
+          branch: dev
           commitChange: true
           createPR: false
           message: 'Update Image Version to ${{ github.sha }}-${{ github.run_number }} to dev'
