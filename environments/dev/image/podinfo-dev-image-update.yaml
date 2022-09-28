@@ -4,6 +4,7 @@ metadata:
   name: podinfo-dev
   namespace: app-podinfo
 spec:
+  suspend: true
   git:
     checkout:
       ref:
