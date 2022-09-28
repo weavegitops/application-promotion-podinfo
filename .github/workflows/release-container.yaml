@@ -1,4 +1,4 @@
-name: Check Versions,Build & Push Container, Test Helm
+name: Build and Release Container
 
 on:
   pull_request:

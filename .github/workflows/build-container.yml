@@ -1,4 +1,4 @@
-name: Build docker image and push to ghcr.io
+name: Build temporary container and push to registry
 
 on:
   push:
@@ -44,3 +44,16 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           tags: |
                     ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}-${{ github.run_number }}
+
+      - name: Update Image Version in the deployment.yaml to dev environment
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          valueFile: 'environments/dev/podinfo/deployment.yaml'
+          propertyPath: 'spec.template.spec.containers[0].image'
+          value: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}-${{ github.run_number }}
+          branch: main
+          targetBranch: main
+          createPR: false
+          message: 'Update Image Version to ${{ env.VERSION }} to dev'
+          masterBranchName: main
+
