@@ -16,7 +16,7 @@ echo "To start we are going to create a git repo feature branch to develop our c
 git checkout main
 git pull
 #delete any existing branch from the origin and locally
-git push origin --delete demo-podinfo-updates
+git push origin --delete demo-podinfo-updates > /dev/null 2>&1
 git branch -D demo-podinfo-updates
 #create the feature branch
 git checkout -b demo-podinfo-updates
