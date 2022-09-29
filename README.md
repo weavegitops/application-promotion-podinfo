@@ -36,9 +36,8 @@ A PR from the feature branch is then made against the main branch, this triggers
 The CI tests then:
 - Checks the version numbers were incremented
 - builds the release container version
-- Runs a Kind cluster and installs the new Helm chart with the new container and checks it installs correctly.
 
-When the tests pass, the PR can be approved and merged to main.
+When the github actions complete, the PR can be approved and merged to main.
 
 This runs the chart-releaser process to release the Helm Chart in the github repository, which acts as a Helm repository.
 
@@ -72,8 +71,8 @@ You can show the podinfo application from each of the clusters to visibly show t
 
 ### Demo Features
 1. Demostrate GitOps and policy checking across a multi-stage build pipeline.
-2. Show a development environment with "instant" image deployment
-3. Show a production environment that requires a pull request to deploy a new image
+2. Show a development environment with "instant" image deployment (uses a github action).
+3. Show a production environment that requires a pull request to deploy a new image.
 4. Show one design pattern for GitOps application promotion: monorepo, instant developer deployment, pull request gate
 
 
