@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: podinfo-helm-repo
-      version: '1.1.7'
+      version: '1.1.9'
   values:
     ui:
       message: "Hi, this message is from the Helm values for uat"
