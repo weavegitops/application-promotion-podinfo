@@ -14,6 +14,7 @@ read -n1 -s
 echo "To start we are going to create a git repo feature branch to develop our changes to the conatiner code."
 git checkout main
 git pull
+git branch -D demo-podinfo-updates
 git checkout -b demo-podinfo-updates
 echo
 echo "Now we have a feature branch, we can start making changes to the container code"
