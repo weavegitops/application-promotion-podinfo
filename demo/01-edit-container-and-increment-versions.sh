@@ -130,6 +130,6 @@ echo "Press a key to reset your git environment"
 read -n1 -s
 git checkout main
 git pull
-git push origin --delete demo-podinfo-updates
+git push origin --delete demo-podinfo-updates > /dev/null 2>&1
 git branch -D demo-podinfo-updates
 
