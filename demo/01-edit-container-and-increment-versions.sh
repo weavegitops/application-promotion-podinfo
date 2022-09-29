@@ -12,9 +12,13 @@ echo "Press a Key"
 echo
 read -n1 -s
 echo "To start we are going to create a git repo feature branch to develop our changes to the conatiner code."
+#make sure we are up to date
 git checkout main
 git pull
+#delete any existing branch from the origin and locally
+git push origin --delete demo-podinfo-updates
 git branch -D demo-podinfo-updates
+#create the feature branch
 git checkout -b demo-podinfo-updates
 echo
 echo "Now we have a feature branch, we can start making changes to the container code"
