@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: podinfo-helm-repo
-      version: '1.1.12'
+      version: '1.1.13'
   values:
     ui:
       message: "Hello, greetings from podinfo"
