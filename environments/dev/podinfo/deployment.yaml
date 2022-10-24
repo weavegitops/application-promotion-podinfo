@@ -27,7 +27,7 @@ spec:
         - name: ghcr-pull-image-creds
       containers:
         - name: podinfod
-          image: ghcr.io/weavegitops/application-promotion-podinfo:63b9cedc54481637f111572163d0d7d4083ebca5-21
+          image: ghcr.io/weavegitops/application-promotion-podinfo:d08e77b718ba3b201a2a801a1bee1e6e7f746423-22
           imagePullPolicy: Always
           ports:
             - name: http
