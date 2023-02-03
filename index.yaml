@@ -3,6 +3,22 @@ entries:
   podinfo:
   - apiVersion: v2
     appVersion: 6.2.0
+    created: "2023-02-03T17:11:41.731788893Z"
+    description: Application Promotion Podinfo Helm chart for Kubernetes
+    digest: 4adca1b70af328669c04e9388faa2c50b44f4dfc9cb59555e9bd3a2d6e115e98
+    home: https://github.com/weavegitops/application-promotion-podinfo
+    kubeVersion: '>=1.19.0-0'
+    maintainers:
+    - email: support@weave.works
+      name: Weaveworks
+    name: podinfo
+    sources:
+    - https://github.com/weavegitops/application-promotion-podinfo
+    urls:
+    - https://github.com/weavegitops/application-promotion-podinfo/releases/download/podinfo-1.1.18/podinfo-1.1.18.tgz
+    version: 1.1.18
+  - apiVersion: v2
+    appVersion: 6.2.0
     created: "2023-01-23T14:09:52.400472222Z"
     description: Application Promotion Podinfo Helm chart for Kubernetes
     digest: e2073134130a99cdf0d5570edd03539f64b022fa88d78917fef01d93e24ab58b
@@ -539,4 +555,4 @@ entries:
     urls:
     - https://github.com/weavegitops/application-promotion-podinfo/releases/download/podinfo-0.0.2/podinfo-0.0.2.tgz
     version: 0.0.2
-generated: "2023-01-23T14:09:52.400783633Z"
+generated: "2023-02-03T17:11:41.732287304Z"
