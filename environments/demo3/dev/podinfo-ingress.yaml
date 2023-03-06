@@ -4,8 +4,8 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
     nginx.ingress.kubernetes.io/service-upstream: "true"
-  name: application-promotion-podinfo
-  namespace: app-podinfo
+  name: application-promotion-podinfo-dev
+  namespace: app-podinfo-dev
 spec:
   ingressClassName: nginx 
   rules:
@@ -16,13 +16,13 @@ spec:
             name: podinfo
             port:
               number: 9898
-        path: /podinfo/?(.*)
+        path: /dev/podinfo/?(.*)
         pathType: Prefix
       - backend:
           service:
             name: podinfo
             port:
               number: 9898
-        path: /(api/?.*)
+        path: /dev/(api/?.*)
         pathType: Prefix
 
