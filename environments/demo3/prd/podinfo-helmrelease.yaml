@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: podinfo-helm-repo
-      version: '1.1.17' # {"$promotion": "default:app-podinfo:prd"}
+      version: '1.1.18' # {"$promotion": "default:app-podinfo:prd"}
   targetNamespace: app-podinfo-prd
   values:
     ui:
