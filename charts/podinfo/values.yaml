@@ -13,10 +13,11 @@ ui:
   message: ""
   logo: ""
 canary:
+  enabled: false
   loadtester:
-    url: http://flagger-flagger-loadtester.flagger/
+    url: ""
   ingress:
-    url: podinfo.weavegitops.com
+    url: ""
 faults:
   delay: false
   error: false
