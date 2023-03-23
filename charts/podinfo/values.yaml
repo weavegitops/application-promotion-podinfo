@@ -6,12 +6,17 @@ backend: # http://backend-podinfo:9898/echo
 backends: []
 image:
   repository: ghcr.io/weavegitops/application-promotion-podinfo
-  tag: 5.1.20
+  tag: 5.2.0
   pullPolicy: IfNotPresent
 ui:
   color: "#34577c"
   message: ""
   logo: ""
+canary:
+  loadtester:
+    url: http://flagger-flagger-loadtester.flagger/
+  ingress:
+    url: podinfo.weavegitops.com
 faults:
   delay: false
   error: false
