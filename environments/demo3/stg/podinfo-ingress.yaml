@@ -20,7 +20,7 @@ spec:
         pathType: Prefix
       - backend:
           service:
-            name: podinfo
+            name: app-podinfo-stg-podinfo
             port:
               number: 9898
         path: /stg/(api/?.*)

@@ -20,7 +20,7 @@ spec:
         pathType: Prefix
       - backend:
           service:
-            name: podinfo
+            name: app-podinfo-prd-podinfo
             port:
               number: 9898
         path: /prd/(api/?.*)
