@@ -18,3 +18,9 @@ spec:
     ui:
       message: "Hi, this message is from the Helm values for dev"
       color: ""
+    canary:
+      enabled: true
+      loadtester:
+        url: http://flagger-flagger-loadtester.flagger/
+      ingress:
+        url: http://172.16.30.224/dev/podinfo
