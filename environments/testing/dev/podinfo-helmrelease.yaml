@@ -16,7 +16,7 @@ spec:
   targetNamespace: app-podinfo-dev
   values:
     service:
-      enabled: false
+      enabled: true
     replicaCount: 1
     ui:
       message: "Hi, this message is from the Helm values for dev"
