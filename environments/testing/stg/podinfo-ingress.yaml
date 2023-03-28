@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+  name: application-promotion-podinfo-stg
+  namespace: app-podinfo-stg
+spec:
+  ingressClassName: nginx 
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: app-podinfo-stg-podinfo
+            port:
+              number: 9898
+        path: /stg/podinfo/?(.*)
+        pathType: Prefix
+      - backend:
+          service:
+            name: app-podinfo-stg-podinfo
+            port:
+              number: 9898
+        path: /stg/(api/?.*)
+        pathType: Prefix
+
