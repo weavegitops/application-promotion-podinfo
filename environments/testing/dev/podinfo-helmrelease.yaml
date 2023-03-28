@@ -15,6 +15,8 @@ spec:
       version: '1.2.2' # {"$promotion": "default:app-podinfo:dev"}
   targetNamespace: app-podinfo-dev
   values:
+    service:
+      enabled: false
     replicaCount: 1
     ui:
       message: "Hi, this message is from the Helm values for dev"
