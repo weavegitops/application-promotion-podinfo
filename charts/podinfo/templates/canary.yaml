@@ -51,13 +51,13 @@ spec:
     webhooks:
       - name: acceptance-test
         type: pre-rollout
-        url: "{{ .Values.canary.loadtester.url }}"
+        url: "http://{{ .Values.canary.loadtester.url }}"
         timeout: 30s
         metadata:
           type: bash
           cmd: "curl -sd 'test' http://podinfo-canary.{{ .Release.Namespace }}/token | grep token"
       - name: load-test
-        url: "{{ .Values.canary.loadtester.url }}"
+        url: "http://{{ .Values.canary.loadtester.url }}"
         timeout: 5s
         metadata:
           cmd: "hey -z 1m -q 10 -c 2 http://{{ .Values.canary.ingress.url}}"
