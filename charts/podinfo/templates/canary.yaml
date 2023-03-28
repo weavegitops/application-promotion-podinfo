@@ -55,7 +55,7 @@ spec:
         timeout: 30s
         metadata:
           type: bash
-          cmd: "curl -sd 'test' http://podinfo-canary.{{ .Release.Namespace }}/token | grep token"
+          cmd: "curl -sd 'test' http://{{ template "podinfo.fullname" . }}-canary.{{ .Release.Namespace }}/token | grep token"
       - name: load-test
         url: "http://{{ .Values.canary.loadtester.url }}"
         timeout: 5s
