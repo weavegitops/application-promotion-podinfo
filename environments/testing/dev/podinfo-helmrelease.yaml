@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: podinfo-helm-repo
-      version: '1.2.4' # {"$promotion": "default:app-podinfo:dev"}
+      version: '1.2.1' # {"$promotion": "default:app-podinfo:dev"}
   targetNamespace: app-podinfo-dev
   values:
     service:
@@ -22,7 +22,7 @@ spec:
       message: "Hi, this message is from the Helm values for dev"
       color: ""
     canary:
-      enabled: true
+      enabled: false
       loadtester:
         url: flagger-loadtester.flux-system
       ingress:
