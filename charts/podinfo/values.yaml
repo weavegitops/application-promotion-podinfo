@@ -9,7 +9,7 @@ image:
   tag: 5.2.0
   pullPolicy: IfNotPresent
 ui:
-  color: "#34577c"
+  color: "#ff0000"
   message: ""
   logo: ""
 canary:
