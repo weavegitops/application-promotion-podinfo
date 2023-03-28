@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: podinfo-helm-repo
-      version: '1.2.1' # {"$promotion": "default:app-podinfo:dev"}
+      version: '1.2.2' # {"$promotion": "default:app-podinfo:dev"}
   targetNamespace: app-podinfo-dev
   values:
     replicaCount: 1
