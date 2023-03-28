@@ -26,7 +26,7 @@ spec:
       loadtester:
         url: flagger-flagger-loadtester.flagger
       ingress:
-        url: podinfo-canary.app-podinfo-dev
+        url: demo3-cluster24.weavegitops.com/dev/podinfo
     hpa:
       enabled: true
       maxReplicas: 3
