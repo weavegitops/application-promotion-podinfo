@@ -12,9 +12,21 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: podinfo-helm-repo
-      version: '1.1.18' # {"$promotion": "default:app-podinfo:prd"}
+      version: '1.2.2' # {"$promotion": "default:app-podinfo:prd"}
   targetNamespace: app-podinfo-prd
   values:
+    service:
+      enabled: false
+    replicaCount: 1
     ui:
       message: "Hi, this message is from the Helm values for prd"
       color: ""
+    canary:
+      enabled: true
+      loadtester:
+        url: flagger-flagger-loadtester.flagger
+      ingress:
+        url: podinfo-canary.app-podinfo-prd
+    hpa:
+      enabled: true
+      maxReplicas: 3
