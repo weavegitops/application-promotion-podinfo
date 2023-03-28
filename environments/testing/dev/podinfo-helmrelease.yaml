@@ -28,5 +28,5 @@ spec:
       ingress:
         url: demo3-cluster24.weavegitops.com/dev/podinfo
     hpa:
-      enabled: true
+      enabled: false
       maxReplicas: 3
