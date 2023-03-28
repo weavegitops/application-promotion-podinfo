@@ -16,7 +16,7 @@ spec:
   targetNamespace: app-podinfo-dev
   values:
     service:
-      enabled: true
+      enabled: false
     replicaCount: 1
     ui:
       message: "Hi, this message is from the Helm values for dev"
@@ -26,7 +26,7 @@ spec:
       loadtester:
         url: flagger-loadtester.flux-system
       ingress:
-        url: demo3-cluster24.weavegitops.com/dev/podinfo
+        url: demo3-cluster24.weavegitops.com/dev/podinfo/
     hpa:
       enabled: true
       maxReplicas: 1
