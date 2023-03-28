@@ -22,7 +22,7 @@ spec:
       message: "Hi, this message is from the Helm values for dev"
       color: ""
     canary:
-      enabled: false
+      enabled: true
       loadtester:
         url: flagger-loadtester.flux-system
       ingress:
