@@ -24,7 +24,7 @@ spec:
     canary:
       enabled: true
       loadtester:
-        url: flagger-flagger-loadtester.flagger
+        url: flagger-loadtester.flux-system
       ingress:
         url: demo3-cluster24.weavegitops.com/dev/podinfo
     hpa:
