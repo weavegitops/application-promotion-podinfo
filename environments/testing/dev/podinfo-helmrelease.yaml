@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: podinfo
-      reconcileStrategy: ChartVersion
+      reconcileStrategy: Revision
       sourceRef:
         kind: HelmRepository
         name: podinfo-helm-repo
@@ -28,5 +28,5 @@ spec:
       ingress:
         url: demo3-cluster24.weavegitops.com/dev/podinfo
     hpa:
-      enabled: false
-      maxReplicas: 3
+      enabled: true
+      maxReplicas: 1
