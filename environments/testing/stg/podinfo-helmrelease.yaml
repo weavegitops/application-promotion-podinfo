@@ -27,9 +27,9 @@ spec:
       hosts:
         - host: demo3-cluster24.weavegitops.com
           paths:
-          - path: "/dev/podinfo/?(.*)"
+          - path: "/stg/podinfo/?(.*)"
             pathType: Prefix
-          - path: "/dev/(api/?.*)"
+          - path: "/stg/(api/?.*)"
             pathType: Prefix
     replicaCount: 1
     ui:
