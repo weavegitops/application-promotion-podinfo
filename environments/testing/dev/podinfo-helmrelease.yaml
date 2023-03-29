@@ -16,7 +16,7 @@ spec:
   targetNamespace: app-podinfo-dev
   values:
     service:
-      enabled: true
+      enabled: false
       externalPort: 9898
     ingress:
       enabled: true
