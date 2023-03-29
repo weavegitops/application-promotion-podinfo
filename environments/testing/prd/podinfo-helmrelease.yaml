@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: podinfo-helm-repo
-      version: '1.2.2' # {"$promotion": "default:app-podinfo-test-app-host51-cluster24:prd"}
+      version: '1.2.5' # {"$promotion": "default:app-podinfo-test-app-host51-cluster24:prd"}
   targetNamespace: app-podinfo-prd
   values:
     service:
@@ -27,10 +27,10 @@ spec:
       hosts:
         - host: demo3-cluster24.weavegitops.com
           paths:
-          - path: "/prd/podinfo/?(.*)"
-            pathType: Prefix
-          - path: "/prd/(api/?.*)"
-            pathType: Prefix
+            - path: "/prd/podinfo/?(.*)"
+              pathType: Prefix
+            - path: "/prd/(api/?.*)"
+              pathType: Prefix
     replicaCount: 1
     ui:
       message: "Hi, this message is from the Helm values for prd"
@@ -44,4 +44,3 @@ spec:
     hpa:
       enabled: true
       maxReplicas: 1
-
