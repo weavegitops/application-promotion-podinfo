@@ -27,10 +27,10 @@ spec:
       hosts:
         - host: demo3-cluster24.weavegitops.com
           paths:
-          - path: "/stg/podinfo/?(.*)"
-            pathType: Prefix
-          - path: "/stg/(api/?.*)"
-            pathType: Prefix
+            - path: "/stg/podinfo/?(.*)"
+              pathType: Prefix
+            - path: "/stg/(api/?.*)"
+              pathType: Prefix
     replicaCount: 1
     ui:
       message: "Hi, this message is from the Helm values for stg"
@@ -44,4 +44,3 @@ spec:
     hpa:
       enabled: true
       maxReplicas: 1
-
