@@ -17,6 +17,20 @@ spec:
   values:
     service:
       enabled: false
+      externalPort: 80
+    ingress:
+      enabled: true
+      className: nginx
+      annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /$1
+        nginx.ingress.kubernetes.io/service-upstream: "true"
+      hosts:
+        - host: demo3-cluster24.weavegitops.com
+          paths:
+          - path: "/prd/podinfo/?(.*)"
+            pathType: Prefix
+          - path: "/prd/(api/?.*)"
+            pathType: Prefix
     replicaCount: 1
     ui:
       message: "Hi, this message is from the Helm values for prd"
@@ -24,9 +38,10 @@ spec:
     canary:
       enabled: true
       loadtester:
-        url: flagger-flagger-loadtester.flagger
+        url: flagger-loadtester.flux-system
       ingress:
-        url: podinfo-canary.app-podinfo-prd
+        url: demo3-cluster24.weavegitops.com/prd/podinfo/
     hpa:
       enabled: true
-      maxReplicas: 3
+      maxReplicas: 1
+
