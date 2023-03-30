@@ -1,12 +1,12 @@
 # Default values for podinfo.
-replicaCount: 3
+replicaCount: 2
 logLevel: info
 host: # 0.0.0.0
 backend: # http://backend-podinfo:9898/echo
 backends: []
 image:
   repository: ghcr.io/weavegitops/application-promotion-podinfo
-  tag: 5.2.5
+  tag: 5.2.6
   pullPolicy: IfNotPresent
 ui:
   color: ""
