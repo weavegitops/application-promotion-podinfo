@@ -24,6 +24,7 @@ spec:
       annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /$1
         nginx.ingress.kubernetes.io/service-upstream: "true"
+        metadata.weave.works/app-url: http://demo3-cluster24.weavegitops.com/dev/podinfo/
       hosts:
         - host: demo3-cluster24.weavegitops.com
           paths:
