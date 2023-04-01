@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: podinfo-helm-repo
-      version: '1.2.8' # {"$promotion": "default:app-podinfo-test-app-host51-cluster24:prd"}
+      version: '1.2.9' # {"$promotion": "default:app-podinfo-test-app-host51-cluster24:prd"}
   targetNamespace: app-podinfo-prd
   values:
     service:
