@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: podinfo-helm-repo
-      version: 'x.x.x' # {"$promotion": "default:app-podinfo-devteam1-host25-cluster30:dev"}
+      version: 'x.x.x' # {"$promotion": "devteam1:app-podinfo-devteam1-host25-cluster30:dev"}
   targetNamespace: app-podinfo-dev
   values:
     service:
