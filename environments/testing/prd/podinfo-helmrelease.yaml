@@ -3,6 +3,8 @@ kind: HelmRelease
 metadata:
   name: podinfo
   namespace: app-podinfo-prd
+  annotations:
+    metadata.weave.works/app-url: http://demo3-cluster30.weavegitops.com/prd/podinfo/
 spec:
   interval: 2m
   chart:
@@ -24,7 +26,6 @@ spec:
       annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /$1
         nginx.ingress.kubernetes.io/service-upstream: "true"
-        metadata.weave.works/app-url: http://demo3-cluster30.weavegitops.com/prd/podinfo/
       hosts:
         - host: demo3-cluster30.weavegitops.com
           paths:
