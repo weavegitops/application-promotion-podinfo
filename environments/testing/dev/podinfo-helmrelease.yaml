@@ -39,7 +39,7 @@ spec:
     canary:
       enabled: true
       loadtester:
-        url: flagger-loadtester.flagger
+        url: flagger-flagger-loadtester.flagger
       ingress:
         url: demo3-cluster30.weavegitops.com/dev/podinfo/
     hpa:
