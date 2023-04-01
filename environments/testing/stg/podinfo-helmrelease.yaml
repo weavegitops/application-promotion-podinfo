@@ -26,7 +26,7 @@ spec:
         nginx.ingress.kubernetes.io/service-upstream: "true"
         metadata.weave.works/app-url: http://demo3-cluster30.weavegitops.com/stg/podinfo/
       hosts:
-        - host: demo3-cluster24.weavegitops.com
+        - host: demo3-cluster30.weavegitops.com
           paths:
             - path: "/stg/podinfo/?(.*)"
               pathType: Prefix
