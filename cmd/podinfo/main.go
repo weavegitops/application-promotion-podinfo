@@ -40,7 +40,7 @@ func main() {
 	fs.String("config", "config.yaml", "config file name")
 	fs.String("ui-path", "./ui", "UI local path")
 	fs.String("ui-logo", "", "UI logo")
-	fs.String("ui-color", "#a65bbd", "UI color")
+	fs.String("ui-color", "#03befc", "UI color")
 	fs.String("ui-message", fmt.Sprintf("Hi, greetings from podinfo v%v", version.VERSION), "UI message")
 	fs.Bool("h2c", false, "allow upgrading to H2C")
 	fs.Bool("random-delay", false, "between 0 and 5 seconds random delay by default")
