@@ -16,6 +16,9 @@ spec:
         name: podinfo-helm-repo
       version: 'x.x.x' # {"$promotion": "devteam1:app-podinfo-devteam1-host25-cluster30:dev"}
   targetNamespace: app-podinfo-dev
+  test:
+    enable: true
+    ignoreFailures: true
   values:
     service:
       enabled: false
