@@ -12,6 +12,6 @@ spec:
     - name: wget
       image: busybox
       command: ['/bin/sh']
-      args: ["-c","wget -q -O - http://{{ .Values.canary.ingress.url }} | grep version | grep {{ .Values.image.tag}}"]
+      args: ["-c","sleep 200;wget -q -O - http://{{ .Values.canary.ingress.url }} | grep version | grep {{ .Values.image.tag}}"]
   restartPolicy: Never
 {{- end }}
