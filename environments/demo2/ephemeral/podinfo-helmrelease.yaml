@@ -4,7 +4,7 @@ metadata:
   name: podinfo
   namespace: app-podinfo
   annotations:
-    metadata.weave.works/dashboard.app_url: https://${LOADBALANCER:=localhost}/podinfo/"
+    metadata.weave.works/dashboard.app_url: https://${LOADBALANCER:=localhost}/podinfo/
 spec:
   interval: 2m
   chart:
