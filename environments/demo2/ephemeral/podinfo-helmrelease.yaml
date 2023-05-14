@@ -3,6 +3,8 @@ kind: HelmRelease
 metadata:
   name: podinfo
   namespace: app-podinfo
+  annotations:
+    metadata.weave.works/dashboard.app_url: https://${LOADBALANCER:=localhost}/podinfo/"
 spec:
   interval: 2m
   chart:
@@ -15,5 +17,5 @@ spec:
       version: '>=0.0.3'
   values:
     ui:
-      message: "Hi, this message is from the Helm values for dev"
+      message: "Hi, this message is from the Helm values for ephemeral environments"
       color: ""
