@@ -16,6 +16,8 @@ spec:
         name: podinfo-helm-repo
       version: '>=0.0.3'
   values:
+    service:
+      type: LoadBalancer
     ui:
       message: "Hi, this message is from the Helm values for ephemeral environments"
       color: ""
