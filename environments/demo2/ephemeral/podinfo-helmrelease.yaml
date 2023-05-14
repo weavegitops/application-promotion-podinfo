@@ -2,18 +2,17 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: podinfo
-  namespace: app-podinfo
+  namespace: zf
   annotations:
     metadata.weave.works/dashboard.app_url: http://${LOADBALANCER:=localhost}:9898
 spec:
   interval: 2m
   chart:
     spec:
-      chart: podinfo
-      reconcileStrategy: ChartVersion
+      chart: ./charts/podinfo
       sourceRef:
-        kind: HelmRepository
-        name: podinfo-helm-repo
+        kind: GitRepository
+        name: "podinfo-gitrepository"
       version: '>=0.0.3'
   values:
     service:

@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: "podinfo-gitrepository"
+  namespace: app-podinfo
+spec:
+  interval: 30s
+  url: "https://github.com/weavegitops/application-promotion-podinfo.git"
+  ref:
+    branch: "${BRANCH:=main}"
