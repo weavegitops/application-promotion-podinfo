@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: podinfo
-  namespace: zf
+  namespace: app-podinfo
   annotations:
     metadata.weave.works/dashboard.app_url: http://${LOADBALANCER:=localhost}:9898
 spec:
