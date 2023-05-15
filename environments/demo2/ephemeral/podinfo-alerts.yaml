@@ -3,7 +3,7 @@ apiVersion: notification.toolkit.fluxcd.io/v1beta1
 kind: Provider
 metadata:
   name: github
-  namespace: app-podinfo
+  namespace: default
 spec:
   type: githubdispatch
   address: https://github.com/weavegitops/application-promotion-podinfo
@@ -14,7 +14,7 @@ apiVersion: notification.toolkit.fluxcd.io/v1beta1
 kind: Alert
 metadata:
   name: github-alert
-  namespace: app-podinfo
+  namespace: default
 spec:
   providerRef:
     name: github
@@ -23,6 +23,7 @@ spec:
   eventSources:
     - kind: HelmRelease
       name: 'podinfo'
+      namespace: 'app-podinfo'
   exclusionList:
     - ".*upgrade.*has.*started"
     - ".*is.*not.*ready"
