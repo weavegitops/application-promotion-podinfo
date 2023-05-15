@@ -1,0 +1,43 @@
+# The action will write the status to the PR that triggered the workflow
+name: Write status to PR
+on:
+  repository_dispatch:
+    types:
+      - HelmRelease/*
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    if: |
+      github.event.client_payload.severity == 'info'      
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: main
+      - id: Parse
+        run: |
+          INPUT=${{ github.event.client_payload.metadata.summary }}
+          echo "PR=${INPUT#pr=}" >> $GITHUB_ENV
+      - name: Get metadata 
+        id: staging
+        run: |
+          VERSION=${{ github.event.client_payload.metadata.revision }}
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+          MESSAGE=${{ github.event.client_payload.message }}
+          echo "MESSAGE=${MESSAGE}" >> $GITHUB_ENV
+          NAMESPACE=${{ github.event.client_payload.involvedObject.namespace }}
+          echo "NAMESPACE=${NAMESPACE}" >> $GITHUB_ENV
+          NAME=${{ github.event.client_payload.involvedObject.name }}
+          echo "NAME=${NAME}" >> $GITHUB_ENV
+          KIND=${{ github.event.client_payload.involvedObject.kind }}
+          echo "KIND=${KIND}" >> $GITHUB_ENV
+      - name: Render Deployment YAML
+        uses: nowactions/envsubst@v1
+        with:
+          input: ./workflow/comment.tmpl
+          output: /tmp/comment
+      - run: gh pr comment ${PR} -F /tmp/comment
