@@ -22,9 +22,6 @@ jobs:
         run: |
           INPUT=${{ github.event.client_payload.metadata.summary }}
           echo "PR=${INPUT#pr=}" >> $GITHUB_ENV
-      - name: Get metadata 
-        id: staging
-        run: |
           VERSION=${{ github.event.client_payload.metadata.revision }}
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
           MESSAGE=${{ github.event.client_payload.message }}
