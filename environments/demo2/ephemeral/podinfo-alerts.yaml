@@ -18,7 +18,7 @@ metadata:
 spec:
   providerRef:
     name: github
-  summary: pr=${PR:=0}
+  summary: pr=${PR:=0} url=http://${LOADBALANCER:=localhost}:9898
   eventSeverity: info
   eventSources:
     - kind: HelmRelease
