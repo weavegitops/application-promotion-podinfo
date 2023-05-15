@@ -1,34 +1,55 @@
+---
 apiVersion: notification.toolkit.fluxcd.io/v1beta1
-kind: Alert
+kind: Provider
 metadata:
-  name: podinfo-kustomize-sync
-  namespace: flux-system
+  name: github
+  namespace: app-podinfo
 spec:
-  providerRef:
-    name: github-app-podinfo
-  summary: "env=dev"
-  eventSeverity: info
-  eventSources:
-    - kind: Kustomization
-      name: app-promo-podinfo-dev-test
-      namespace: flux-system
+  type: githubdispatch
+  address: https://github.com/weavegitops/application-promotion-podinfo
+  secretRef:
+    name: github-token
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta1
 kind: Alert
 metadata:
-  name: podinfo-dispatch
-  namespace: flux-system
+  name: github-alert
+  namespace: app-podinfo
 spec:
   providerRef:
-    name: github-dispatch-app-podinfo
-  summary: "env=dev"
+    name: github
+  summary: pr=${PR:=0}
   eventSeverity: info
   eventSources:
     - kind: HelmRelease
-      name: podinfo
-      namespace: app-podinfo
+      name: 'podinfo'
   exclusionList:
     - ".*upgrade.*has.*started"
-    - ".*install.*has.*started"
     - ".*is.*not.*ready"
+    - ".*install.*has.*started"
     - "^Dependencies.*"
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  creationTimestamp: null
+  name: my-github-secret
+  namespace: app-podinfo
+spec:
+  data:
+  - remoteRef:
+      key: demo/github-pat-secret
+      property: password
+    secretKey: password
+  refreshInterval: 1h0m0s
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: aws-secretstore
+  target:
+    creationPolicy: Owner
+    name: my-github-secret
+    template:
+      type: Opaque
+      data:
+        password: "{{ .password }}"
+        username: "ww-demo-bot"
