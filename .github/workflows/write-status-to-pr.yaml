@@ -24,5 +24,9 @@ jobs:
           echo "PR=${INPUT#pr=}" >> $GITHUB_ENV
           VERSION=${{ github.event.client_payload.metadata.revision }}
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
-          envsubst < workflow/comment.tmpl > /tmp/comment
+      - name: Render Deployment YAML
+        uses: nowactions/envsubst@v1
+        with:
+          input: .github/workflows/comment.tmpl
+          output: /tmp/comment
       - run: gh pr comment ${PR} -F /tmp/comment
