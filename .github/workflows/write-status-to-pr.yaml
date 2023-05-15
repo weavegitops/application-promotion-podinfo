@@ -20,7 +20,7 @@ jobs:
           ref: main
       - id: Parse
         run: |
-          INPUT=${{ github.event.client_payload.metadata.summary }}
+          INPUT='${{ github.event.client_payload.metadata.summary }}'
           INPUT_PR=$(echo $INPUT | cut -d ' ' -f 1)
           INPUT_URL=$(echo $INPUT | cut -d ' ' -f 2)
           echo "PR=${INPUT_PR#pr=}" >> $GITHUB_ENV
