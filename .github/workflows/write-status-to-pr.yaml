@@ -24,6 +24,10 @@ jobs:
           echo "PR=${INPUT#pr=}" >> $GITHUB_ENV
           VERSION=${{ github.event.client_payload.metadata.revision }}
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
+          NAMESPACE=${{ github.event.client_payload.involvedObject.namespace }}
+          echo "NAMESPACE=${NAMESPACE}" >> $GITHUB_ENV
+          NAME=${{ github.event.client_payload.involvedObject.name }}
+          echo "NAME=${NAME}" >> $GITHUB_ENV
       - name: Render Deployment YAML
         uses: nowactions/envsubst@v1
         with:
