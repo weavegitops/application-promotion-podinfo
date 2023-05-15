@@ -8,7 +8,7 @@ spec:
   type: githubdispatch
   address: https://github.com/weavegitops/application-promotion-podinfo
   secretRef:
-    name: github-token
+    name: my-github-secret
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta1
 kind: Alert
