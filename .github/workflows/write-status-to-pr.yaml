@@ -21,8 +21,8 @@ jobs:
       - id: Parse
         run: |
           INPUT=${{ github.event.client_payload.metadata.summary }}
-          INPUT_PR=$($INPUT | cut -d ' ' -f 1)
-          INPUT_URL=$($INPUT | cut -d ' ' -f 2)
+          INPUT_PR=$(echo $INPUT | cut -d ' ' -f 1)
+          INPUT_URL=$(echo $INPUT | cut -d ' ' -f 2)
           echo "PR=${INPUT_PR#pr=}" >> $GITHUB_ENV
           echo "URL=${INPUT_URL#url=}" >> $GITHUB_ENV
           VERSION=${{ github.event.client_payload.metadata.revision }}
