@@ -1,0 +1,31 @@
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Provider
+metadata:
+  name: github
+  namespace: default
+spec:
+  type: githubdispatch
+  address: https://github.com/weavegitops/application-promotion-podinfo
+  secretRef:
+    name: my-github-secret
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Alert
+metadata:
+  name: github-alert
+  namespace: default
+spec:
+  providerRef:
+    name: github
+  summary: pr=${PR:=0} url=http://${LOADBALANCER:=localhost}:9898
+  eventSeverity: info
+  eventSources:
+    - kind: HelmRelease
+      name: 'podinfo'
+      namespace: 'app-podinfo'
+  exclusionList:
+    - ".*upgrade.*has.*started"
+    - ".*is.*not.*ready"
+    - ".*install.*has.*started"
+    - "^Dependencies.*"

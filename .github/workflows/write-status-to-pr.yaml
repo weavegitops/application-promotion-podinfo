@@ -1,0 +1,44 @@
+# The action will write the status to the PR that triggered the workflow
+name: Write status to PR
+on:
+  repository_dispatch:
+    types:
+      - HelmRelease/*
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    if: |
+      github.event.client_payload.severity == 'info'      
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: main
+      - id: Parse
+        run: |
+          INPUT='${{ github.event.client_payload.metadata.summary }}'
+          INPUT_PR=$(echo $INPUT | cut -d ' ' -f 1)
+          INPUT_URL=$(echo $INPUT | cut -d ' ' -f 2)
+          echo "PR=${INPUT_PR#pr=}" >> $GITHUB_ENV
+          echo "URL=${INPUT_URL#url=}" >> $GITHUB_ENV
+          VERSION=${{ github.event.client_payload.metadata.revision }}
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+          NAMESPACE=${{ github.event.client_payload.involvedObject.namespace }}
+          echo "NAMESPACE=${NAMESPACE}" >> $GITHUB_ENV
+          NAME=${{ github.event.client_payload.involvedObject.name }}
+          echo "NAME=${NAME}" >> $GITHUB_ENV
+          KIND=${{ github.event.client_payload.involvedObject.kind }}
+          echo "KIND=${KIND}" >> $GITHUB_ENV
+      - name: Render Deployment YAML
+        uses: nowactions/envsubst@v1
+        with:
+          input: .github/workflows/comment.tmpl
+          output: ./comment
+      - run: gh pr comment ${PR} -F ./comment
+        env:
+          GH_TOKEN: ${{ secrets.TOKEN }}
+
