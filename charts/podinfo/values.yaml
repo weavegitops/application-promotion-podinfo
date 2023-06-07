@@ -6,7 +6,7 @@ backend: # http://backend-podinfo:9898/echo
 backends: []
 image:
   repository: ghcr.io/weavegitops/application-promotion-podinfo
-  tag: 5.3.8
+  tag: 5.3.9
   pullPolicy: IfNotPresent
 ui:
   color: ""
