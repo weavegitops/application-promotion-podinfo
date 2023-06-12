@@ -14,7 +14,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: podinfo-helm-repo
-      version: '1.4.18' # {"$promotion": "devteam1:app-podinfo-devteam1-host25-cluster30:stg"}
+      version: '1.4.19' # {"$promotion": "devteam1:app-podinfo-devteam1-host25-cluster30:stg"}
   targetNamespace: app-podinfo-stg
   test:
     enable: true
