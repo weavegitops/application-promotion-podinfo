@@ -1,5 +1,5 @@
 apiVersion: v2
-version: 1.4.22
+version: 1.4.23
 appVersion: 5.3.17
 name: podinfo
 engine: gotpl
