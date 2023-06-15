@@ -27,7 +27,7 @@ jobs:
         HELM_VERSION=$(cat charts/podinfo/Chart.yaml | yq .version)
         echo "The Helm Chart version: ${HELM_VERSION}"
         echo ::set-output name=HELM_VERSION::${HELM_VERSION}
-        HELM_CONTAINER_VERSION=$(cat charts/podinfo/values.yaml | yq .image.tag)
+        HELM_CONTAINER_VERSION=$(cat charts/podinfo/Chart.yaml | yq .appVersion)
         echo "The Helm Chart Container version: ${HELM_CONTAINER_VERSION}"
         if [ "$VERSION" != "$HELM_CONTAINER_VERSION" ]; then
           echo "The Container version and Helm container version should be equal, exiting"
