@@ -12,6 +12,6 @@ spec:
     - name: wget
       image: busybox
       command: ['/bin/sh']
-      args: ["-c","sleep 240;SECONDS=0;until wget -q -O - http://{{ .Values.canary.ingress.url }} | grep version | grep {{ default .Chart.AppVersion .Values.image.tag }};do if ((SECONDS > 300 ));then echo "Giving up after 300 seconds";exit 1;fi;echo "Waiting for service to reach target version";sleep 5;done"]
+      args: ["-c","sleep 240;SECONDS=0;until wget -q -O - http://{{ .Values.canary.ingress.url }} | grep version | grep {{ default .Chart.AppVersion .Values.image.tag }};do if ((SECONDS > 300 ));then echo 'Giving up after 300 seconds';exit 1;fi;echo 'Waiting for service to reach target version';sleep 5;done"]
   restartPolicy: Never
 {{- end }}
