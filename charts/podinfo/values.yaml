@@ -30,7 +30,7 @@ service:
   annotations: {}
   type: ClusterIP
   metricsPort: 9797
-  httpPort: 9898
+  httpPort: 9696
   externalPort: 9898
   grpcPort: 9999
   grpcService: podinfo
