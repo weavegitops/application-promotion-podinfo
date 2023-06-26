@@ -31,7 +31,7 @@ service:
   type: ClusterIP
   metricsPort: 9797
   httpPort: 9696
-  externalPort: 9898
+  externalPort: 9696
   grpcPort: 9999
   grpcService: podinfo
   nodePort: 31198
