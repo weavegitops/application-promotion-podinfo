@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: podinfod
-          image: pfcurtis/podinfo:sha-98b5c779
+          image: ghcr.io/weavegitops/application-promotion-podinfo:5.3.31
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
