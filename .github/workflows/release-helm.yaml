@@ -7,6 +7,10 @@ on:
     paths:
       - 'charts/**'
 
+permissions:
+  contents: write
+  pull-requests: write
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
