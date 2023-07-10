@@ -5,6 +5,6 @@ metadata:
   namespace: app-podinfo
 spec:
   interval: 30s
-  url: "https://github.com/weavegitops/application-promotion-podinfo.git"
+  url: "https://github.com/weavegitops-trials/application-promotion-podinfo.git"
   ref:
     branch: "${BRANCH:=main}"
