@@ -5,7 +5,7 @@ host: # 0.0.0.0
 backend: # http://backend-podinfo:9898/echo
 backends: []
 image:
-  repository: ghcr.io/weavegitops/application-promotion-podinfo
+  repository: ghcr.io/weavegitops-trials/application-promotion-podinfo
   tag: ""
   pullPolicy: IfNotPresent
 ui:
