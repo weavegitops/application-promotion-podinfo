@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: nginx 
   rules:
-  - host: "podinfo.stage.cx.weave.works"
+  - host: "podinfo.dev.cx.weave.works"
     http:
       paths:
       - backend:
