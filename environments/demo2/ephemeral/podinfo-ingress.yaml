@@ -9,7 +9,8 @@ metadata:
 spec:
   ingressClassName: nginx 
   rules:
-  - http:
+  - host: "podinfo.stage.cx.weave.works"
+    http:
       paths:
       - backend:
           service:
@@ -18,3 +19,11 @@ spec:
               number: 9898
         path: /podinfo/?(.*)
         pathType: Prefix
+      - backend:
+          service:
+            name: podinfo
+            port:
+              number: 9898
+        path: /(api/?.*)
+        pathType: Prefix
+
