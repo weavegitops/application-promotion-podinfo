@@ -18,6 +18,7 @@ spec:
   targetNamespace: app-podinfo-stg
   test:
     enable: true
+    timeout: 5m
     ignoreFailures: false
   install:
     remediation:
