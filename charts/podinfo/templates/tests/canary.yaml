@@ -12,6 +12,6 @@ spec:
     - name: wget
       image: busybox
       command: ['/bin/sh']
-      args: ["-c","sleep 240;SECONDS=0;until wget -q -O - http://{{ .Values.canary.ingress.url }} | grep version | grep {{ default .Chart.AppVersion .Values.image.tag }};do if ((SECONDS > 300 ));then echo 'Giving up after 300 seconds';exit 1;fi;echo 'Waiting for service to reach target version';sleep 5;done"]
+      args: ["-c","VERSION={{ default .Chart.AppVersion .Values.image.tag }};for i in {1..60};do wget -q -O output http://demo3-cluster30.weavegitops.com/dev/podinfo/;if grep hostname output | grep primary; then if grep version output | grep $VERSION; then echo 'Version matches, Test succeeded';exit 0;else echo 'Primary version does not match, waiting for promotion';fi;else echo 'Canary process still running, waiting for promotion';fi;sleep 5;done;echo 'Giving Up after 5  minutes';exit 1"]
   restartPolicy: Never
 {{- end }}
