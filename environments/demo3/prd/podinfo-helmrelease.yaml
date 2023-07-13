@@ -19,6 +19,19 @@ spec:
   test:
     enable: true
     ignoreFailures: true
+  install:
+    remediation:
+      retries: 2
+  upgrade:
+    remediation:
+      retries: 2
+  rollback:
+    timeout: 5m
+    disableWait: false
+    disableHooks: false
+    recreate: false
+    force: false
+    cleanupOnFail: false
   values:
     service:
       enabled: false
