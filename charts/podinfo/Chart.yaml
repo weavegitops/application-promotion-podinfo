@@ -1,6 +1,6 @@
 apiVersion: v2
-version: 1.4.54
-appVersion: 5.3.36
+version: 1.4.55
+appVersion: 5.3.37
 name: podinfo
 engine: gotpl
 description: Application Promotion Podinfo Helm chart for Kubernetes
