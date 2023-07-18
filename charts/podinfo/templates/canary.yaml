@@ -4,16 +4,11 @@ kind: Canary
 metadata:
   name: {{ template "podinfo.fullname" . }}
 spec:
-  provider: nginx
+  provider: istio
   # deployment reference
   targetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ template "podinfo.fullname" . }}
-  # ingress reference
-  ingressRef:
-    apiVersion: networking.k8s.io/v1
-    kind: Ingress
     name: {{ template "podinfo.fullname" . }}
   # HPA reference (optional)
   autoscalerRef:
@@ -39,14 +34,21 @@ spec:
     # canary increment step
     # percentage (0-100)
     stepWeight: 5
-    # NGINX Prometheus checks
     metrics:
-    - name: request-success-rate
-      # minimum req success rate (non 5xx responses)
-      # percentage (0-100)
-      thresholdRange:
-        min: 99
-      interval: 1m
+      - name: error-rate
+        templateRef:
+          name: error-rate
+          namespace: istio-system
+        thresholdRange:
+          max: 1
+        interval: 30s
+      - name: latency
+        templateRef:
+          name: latency
+          namespace: istio-system
+        thresholdRange:
+          max: 500
+        interval: 30s
     # testing (optional)
     webhooks:
       - name: acceptance-test
