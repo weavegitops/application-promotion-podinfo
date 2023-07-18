@@ -15,9 +15,9 @@ ui:
 canary:
   enabled: false
   loadtester:
-    url: "http://fabrikam-app-fabrikam-app-podinfo.fabrikam-app:9898"
+    url: "fabrikam-app-fabrikam-app-podinfo.fabrikam-app:9898"
   ingress:
-    url: "http://fabrikam-app-fabrikam-app-podinfo.fabrikam-app:9898"
+    url: "fabrikam-app-fabrikam-app-podinfo.fabrikam-app:9898"
 faults:
   delay: false
   error: false
