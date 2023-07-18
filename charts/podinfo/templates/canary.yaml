@@ -15,15 +15,7 @@ spec:
     apiVersion: autoscaling/v2
     kind: HorizontalPodAutoscaler
     name: {{ template "podinfo.fullname" . }}
-  service:
-    # container port
-    port: 9898
-    # Istio gateways (optional)
-    gateways:
-      - istio-system/public-gateway
-    # Istio virtual service host names (optional)
-    hosts:
-      - "*"
+
   # the maximum time in seconds for the canary deployment
   # to make progress before it is rollback (default 600s)
   progressDeadlineSeconds: 60
@@ -32,6 +24,13 @@ spec:
     port: 80
     # container port number or name
     targetPort: 9898
+    # Istio gateways (optional)
+    gateways:
+      - istio-system/public-gateway
+    # Istio virtual service host names (optional)
+    hosts:
+      - "*"
+      
   analysis:
     # schedule interval (default 60s)
     interval: 10s
