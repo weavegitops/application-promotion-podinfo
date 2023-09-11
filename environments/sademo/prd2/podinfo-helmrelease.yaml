@@ -14,7 +14,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: podinfo-helm-repo
-      version: '1.5.27' # {"$promotion": "default:app-podinfo-devteam:prd"}
+      version: '1.5.29' # {"$promotion": "default:app-podinfo-devteam:prd"}
   targetNamespace: app-podinfo-prd
   test:
     enable: true
