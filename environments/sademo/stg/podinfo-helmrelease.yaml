@@ -1,0 +1,65 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: podinfo
+  namespace: app-podinfo-stg
+  annotations:
+    metadata.weave.works/app-url: http://sademo-devteam.weavegitops.com/stg/podinfo/
+spec:
+  interval: 2m
+  chart:
+    spec:
+      chart: podinfo
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: podinfo-helm-repo
+      version: '1.5.27' # {"$promotion": "default:app-podinfo-devteam:stg"}
+  targetNamespace: app-podinfo-stg
+  test:
+    enable: true
+    timeout: 5m
+    ignoreFailures: false
+  install:
+    remediation:
+      retries: 2
+  upgrade:
+    remediation:
+      retries: 2
+  rollback:
+    timeout: 5m
+    disableWait: false
+    disableHooks: false
+    recreate: false
+    force: false
+    cleanupOnFail: false
+  values:
+    service:
+      enabled: false
+      externalPort: 80
+    ingress:
+      enabled: true
+      className: nginx
+      annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /$1
+        nginx.ingress.kubernetes.io/service-upstream: "true"
+      hosts:
+        - host: sademo-devteam.weavegitops.com
+          paths:
+            - path: "/stg/podinfo/?(.*)"
+              pathType: Prefix
+            - path: "/stg/(api/?.*)"
+              pathType: Prefix
+    replicaCount: 1
+    ui:
+      message: "Hi, this message is from the Helm values for stg"
+      color: ""
+    canary:
+      enabled: true
+      loadtester:
+        url: flagger-flagger-loadtester.flagger
+      ingress:
+        url: sademo-devteam.weavegitops.com/stg/podinfo/
+    hpa:
+      enabled: true
+      maxReplicas: 1
