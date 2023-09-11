@@ -12,6 +12,6 @@ spec:
     - name: podinfo-canary-test
       image: bash
       command: ['/usr/local/bin/bash']
-      args: ["-c","for i in {1..60};do wget -q -O output http://demo3-cluster30.weavegitops.com/dev/podinfo/;if grep hostname output | grep primary; then if grep version output | grep {{ default .Chart.AppVersion .Values.image.tag }}; then echo 'Version matches, Test succeeded';exit 0;else echo 'Primary version does not match, waiting for promotion';fi;else echo 'Canary process still running, waiting for promotion';fi;sleep 5;done;echo 'Giving Up after 5  minutes';exit 1"]
+      args: ["-c","for i in {1..60};do wget -q -O output http://{{ .Values.canary.ingress.url }};if grep hostname output | grep primary; then if grep version output | grep {{ default .Chart.AppVersion .Values.image.tag }}; then echo 'Version matches, Test succeeded';exit 0;else echo 'Primary version does not match, waiting for promotion';fi;else echo 'Canary process still running, waiting for promotion';fi;sleep 5;done;echo 'Giving Up after 5  minutes';exit 1"]
   restartPolicy: Never
 {{- end }}
