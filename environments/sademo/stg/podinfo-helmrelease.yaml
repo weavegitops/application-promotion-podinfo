@@ -14,7 +14,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: podinfo-helm-repo
-      version: '1.5.29' # {"$promotion": "default:app-podinfo-devteam:stg"}
+      version: '1.5.30' # {"$promotion": "default:app-podinfo-devteam:stg"}
   targetNamespace: app-podinfo-stg
   test:
     enable: true
