@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    templates.weave.works/template-name: app-podinfo-chart-and-pipeline-devteam1
+    templates.weave.works/template-namespace: default
+  name: app-podinfo-stg
+  namespace: app-podinfo-stg
+  annotations:
+    templates.weave.works/create-request: "{\"repository_url\":\"https://github.com/weavegitops/application-promotion-podinfo\",\"head_branch\":\"wge-create-branch-xy5x9\",\"base_branch\":\"main\",\"title\":\"Create resource default\",\"description\":\"This PR creates a app-podinfo-chart-and-pipeline-devteam1 instance\",\"template_name\":\"app-podinfo-chart-and-pipeline-devteam1\",\"parameter_values\":{\"CLUSTER_NAME\":\"devteam\",\"CLUSTER_NAMESPACE\":\"default\",\"DEV_NAMESPACE\":\"app-podinfo-dev\",\"PRD_NAMESPACE\":\"app-podinfo-prd\",\"STG_NAMESPACE\":\"app-podinfo-stg\"},\"commit_message\":\"Create app-podinfo-chart-and-pipeline-devteam1 instance\",\"credentials\":{},\"template_namespace\":\"devteam1\",\"template_kind\":\"GitOpsTemplate\"}"

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    templates.weave.works/template-name: app-podinfo-chart-and-pipeline-devteam1
+    templates.weave.works/template-namespace: default
+  name: app-podinfo-dev
+  namespace: app-podinfo-dev
+  annotations:
+    templates.weave.works/create-request: "{\"repository_url\":\"https://github.com/weavegitops/application-promotion-podinfo\",\"head_branch\":\"wge-create-branch-xy5x9\",\"base_branch\":\"main\",\"title\":\"Create resource default\",\"description\":\"This PR creates a app-podinfo-chart-and-pipeline-devteam1 instance\",\"template_name\":\"app-podinfo-chart-and-pipeline-devteam1\",\"parameter_values\":{\"CLUSTER_NAME\":\"devteam\",\"CLUSTER_NAMESPACE\":\"default\",\"DEV_NAMESPACE\":\"app-podinfo-dev\",\"PRD_NAMESPACE\":\"app-podinfo-prd\",\"STG_NAMESPACE\":\"app-podinfo-stg\"},\"commit_message\":\"Create app-podinfo-chart-and-pipeline-devteam1 instance\",\"credentials\":{},\"template_namespace\":\"devteam1\",\"template_kind\":\"GitOpsTemplate\"}"
+    templates.weave.works/created-files: "{\"files\":[\"clusters/default/devteam/app-podinfo-dev/namespace.yaml\",\"clusters/default/devteam/app-podinfo-dev/app-podinfo-dev-flux-system-kustomization.yaml\",\"clusters/default/devteam/app-podinfo-dev/app-podinfo-dev-notification.yaml\",\"clusters/default/devteam/app-podinfo-stg/namespace.yaml\",\"clusters/default/devteam/app-podinfo-stg/app-podinfo-stg-flux-system-kustomization.yaml\",\"clusters/default/devteam/app-podinfo-stg/app-podinfo-stg-notification.yaml\",\"clusters/default/devteam/app-podinfo-prd/namespace.yaml\",\"clusters/default/devteam/app-podinfo-prd/app-podinfo-prd-flux-system-kustomization.yaml\",\"clusters/default/devteam/app-podinfo-prd/app-podinfo-prd-notification.yaml\",\"clusters/management/pipelines/app-podinfo-devteam-default.yaml\",\"clusters/management/secrets/promotion-credentials-app-podinfo-devteam-default.yaml\"]}"

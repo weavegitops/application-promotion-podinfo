@@ -1,0 +1,40 @@
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Provider
+metadata:
+  labels:
+    templates.weave.works/template-name: app-podinfo-chart-and-pipeline-devteam1
+    templates.weave.works/template-namespace: default
+  name: app-podinfo-dev-provider
+  namespace: app-podinfo-dev
+  annotations:
+    templates.weave.works/create-request: "{\"repository_url\":\"https://github.com/weavegitops/application-promotion-podinfo\",\"head_branch\":\"wge-create-branch-xy5x9\",\"base_branch\":\"main\",\"title\":\"Create resource default\",\"description\":\"This PR creates a app-podinfo-chart-and-pipeline-devteam1 instance\",\"template_name\":\"app-podinfo-chart-and-pipeline-devteam1\",\"parameter_values\":{\"CLUSTER_NAME\":\"devteam\",\"CLUSTER_NAMESPACE\":\"default\",\"DEV_NAMESPACE\":\"app-podinfo-dev\",\"PRD_NAMESPACE\":\"app-podinfo-prd\",\"STG_NAMESPACE\":\"app-podinfo-stg\"},\"commit_message\":\"Create app-podinfo-chart-and-pipeline-devteam1 instance\",\"credentials\":{},\"template_namespace\":\"devteam1\",\"template_kind\":\"GitOpsTemplate\"}"
+spec:
+  address: https://sa-demo.trial.cx.weave.works/promotion/default/app-podinfo-devteam/dev
+  type: generic
+
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Alert
+metadata:
+  labels:
+    templates.weave.works/template-name: app-podinfo-chart-and-pipeline-devteam1
+    templates.weave.works/template-namespace: default
+  name: app-podinfo-dev-alert
+  namespace: app-podinfo-dev
+spec:
+  eventSeverity: info
+  eventSources:
+  - kind: HelmRelease
+    name: podinfo
+    namespace: app-podinfo-dev
+  exclusionList:
+  - .*error.*
+  - .*failed.*
+  - .*install.*succeeded
+  - .*upgrade.*succeeded
+  - .*install.*has.*started
+  - .*upgrade.*has.*started
+  - .*is.*not.*ready
+  - ^Dependencies.*
+  providerRef:
+    name: app-podinfo-dev-provider
