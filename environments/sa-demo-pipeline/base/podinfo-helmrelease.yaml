@@ -14,7 +14,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: podinfo-helm-repo
-      version: x.x.x # {"$promotion": "${pipeline_ns}:${pipeline_name}:${environment:=dev}"}
   targetNamespace: app-podinfo-${environment:=dev}
   test:
     enable: true

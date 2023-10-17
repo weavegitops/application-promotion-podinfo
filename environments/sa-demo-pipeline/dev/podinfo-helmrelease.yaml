@@ -1,0 +1,7 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: podinfo
+  namespace: app-podinfo-dev
+spec:
+      version: x.x.x # {"$promotion": "devteam1:app-podinfo-dev-sandbox:dev"}
