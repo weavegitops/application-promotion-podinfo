@@ -4,7 +4,7 @@ metadata:
   name: podinfo
   namespace: app-podinfo-dev
   annotations:
-    metadata.weave.works/app-url: http://sademo-devteam.weavegitops.com/dev/podinfo/
+    metadata.weave.works/app-url: http://devteam-default.sa-demo.trial.cx.weave.works/dev/podinfo/
 spec:
   interval: 2m
   chart:
@@ -44,7 +44,7 @@ spec:
         nginx.ingress.kubernetes.io/rewrite-target: /$1
         nginx.ingress.kubernetes.io/service-upstream: "true"
       hosts:
-        - host: sademo-devteam.weavegitops.com
+        - host: devteam-default.sa-demo.trial.cx.weave.works
           paths:
             - path: "/dev/podinfo/?(.*)"
               pathType: Prefix
@@ -59,7 +59,7 @@ spec:
       loadtester:
         url: flagger-flagger-loadtester.flagger
       ingress:
-        url: sademo-devteam.weavegitops.com/dev/podinfo/
+        url: devteam-default.sa-demo.trial.cx.weave.works/dev/podinfo/
     hpa:
       enabled: true
       maxReplicas: 1
