@@ -3,4 +3,6 @@ kind: HelmRelease
 metadata:
   name: podinfo
 spec:
+  chart:
+    spec:
       version: 1.5.40 # {"$promotion": "devteam1:app-podinfo-dev-sandbox:stg"}
