@@ -2,6 +2,5 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: podinfo
-  namespace: app-podinfo-stg
 spec:
       version: 1.5.40 # {"$promotion": "devteam1:app-podinfo-dev-sandbox:stg"}

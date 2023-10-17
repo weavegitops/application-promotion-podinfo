@@ -2,7 +2,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: podinfo
-  namespace: app-podinfo-${environment:=dev}
   annotations:
     metadata.weave.works/app-url: http://${cluster_url}/${environment:=dev}/podinfo/
 spec:

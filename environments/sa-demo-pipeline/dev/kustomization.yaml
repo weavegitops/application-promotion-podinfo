@@ -1,6 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-bases:
+namespace: app-podinfo-dev
+resources:
 - ../base
 patchesStrategicMerge:
 - podinfo-helmrelease.yaml
