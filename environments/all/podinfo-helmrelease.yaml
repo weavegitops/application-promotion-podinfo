@@ -41,6 +41,7 @@ spec:
       enabled: true
       className: nginx
       annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
         nginx.ingress.kubernetes.io/rewrite-target: /$1
         nginx.ingress.kubernetes.io/service-upstream: "true"
       hosts:
