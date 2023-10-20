@@ -1,0 +1,25 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  labels:
+    templates.weave.works/template-name: app-podinfo-chart-and-pipeline-devteam1
+    templates.weave.works/template-namespace: default
+  name: app-podinfo-dev
+  namespace: devteam1
+  annotations:
+    templates.weave.works/create-request: "{\"repository_url\":\"https://github.com/weavegitops/application-promotion-podinfo\",\"head_branch\":\"wge-create-branch-9uschw\",\"base_branch\":\"main\",\"title\":\"Create resource \",\"description\":\"This PR creates a app-podinfo-chart-and-pipeline-devteam1 instance\",\"template_name\":\"app-podinfo-chart-and-pipeline-devteam1\",\"parameter_values\":{\"CLUSTER_NAME\":\"dev-sandbox\",\"CLUSTER_NAMESPACE\":\"devteam1\",\"CLUSTER_URL\":\"dev-sandbox-devteam1.sa-demo.trial.cx.weave.works\",\"DEV_NAMESPACE\":\"app-podinfo-dev\",\"PRD_NAMESPACE\":\"app-podinfo-prd\",\"STG_NAMESPACE\":\"app-podinfo-stg\"},\"commit_message\":\"Create app-podinfo-chart-and-pipeline-devteam1 instance\",\"credentials\":{},\"template_namespace\":\"devteam1\",\"template_kind\":\"GitOpsTemplate\"}"
+    templates.weave.works/created-files: "{\"files\":[\"clusters/devteam1/dev-sandbox/app-podinfo-dev/app-podinfo-dev-flux-system-kustomization.yaml\",\"clusters/devteam1/dev-sandbox/app-podinfo-dev/app-podinfo-dev-notification.yaml\",\"clusters/devteam1/dev-sandbox/app-podinfo-stg/app-podinfo-stg-flux-system-kustomization.yaml\",\"clusters/devteam1/dev-sandbox/app-podinfo-stg/app-podinfo-stg-notification.yaml\",\"clusters/devteam1/dev-sandbox/app-podinfo-prd/app-podinfo-prd-flux-system-kustomization.yaml\",\"clusters/devteam1/dev-sandbox/app-podinfo-prd/app-podinfo-prd-notification.yaml\",\"clusters/management/pipelines/app-podinfo-dev-sandbox-devteam1.yaml\",\"clusters/management/secrets/promotion-credentials-app-podinfo-dev-sandbox-devteam1.yaml\"]}"
+spec:
+  interval: 10m0s
+  path: ./environments/sa-demo-pipeline/dev
+  postBuild:
+    substitute:
+      cluster_url: dev-sandbox-devteam1.sa-demo.trial.cx.weave.works
+      environment: dev
+      pipeline_name: app-podinfo-dev-sandbox
+      pipeline_ns: devteam1
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: application-promotion-podinfo
+    namespace: devteam1
