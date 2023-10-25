@@ -3,7 +3,7 @@ kind: HelmRelease
 metadata:
   name: podinfo
   annotations:
-    metadata.weave.works/app-url: http://${cluster_url}/${environment:=dev}/podinfo/
+    metadata.weave.works/app-url: http://podinfo-${environment:=dev}.${cluster_url}/${environment:=dev}/podinfo/
 spec:
   interval: 2m
   chart:
@@ -39,11 +39,12 @@ spec:
       enabled: true
       className: nginx
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-prod
+        cert-manager.io/cluster-issuer: letsencrypt
+        external-dns.alpha.kubernetes.io/hostname: podinfo-${environment:=dev}.${cluster_url}
         nginx.ingress.kubernetes.io/rewrite-target: /$1
         nginx.ingress.kubernetes.io/service-upstream: "true"
       hosts:
-        - host: ${cluster_url}
+        - host: podinfo-${environment:=dev}.${cluster_url}
           paths:
             - path: "/${environment:=dev}/podinfo/?(.*)"
               pathType: Prefix
@@ -58,7 +59,7 @@ spec:
       loadtester:
         url: flagger-flagger-loadtester.flagger
       ingress:
-        url: ${cluster_url}/${environment:=dev}/podinfo/
+        url: podinfo-${environment:=dev}.${cluster_url}/${environment:=dev}/podinfo/
     hpa:
       enabled: true
       maxReplicas: 1
