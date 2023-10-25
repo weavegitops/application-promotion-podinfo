@@ -1,0 +1,24 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  labels:
+    templates.weave.works/template-name: app-podinfo-chart-and-pipeline-devteam1
+    templates.weave.works/template-namespace: default
+  name: app-podinfo-stg
+  namespace: devteam1
+  annotations:
+    templates.weave.works/create-request: "{\"repository_url\":\"https://github.com/weavegitops/application-promotion-podinfo\",\"head_branch\":\"wge-create-branch-wmpao\",\"base_branch\":\"main\",\"title\":\"Create resource \",\"description\":\"This PR creates a app-podinfo-chart-and-pipeline-devteam1 instance\",\"template_name\":\"app-podinfo-chart-and-pipeline-devteam1\",\"parameter_values\":{\"CLUSTER_NAME\":\"workload-cluster\",\"CLUSTER_NAMESPACE\":\"devteam1\",\"CLUSTER_URL\":\"workload-cluster.devteam1.sa-demo.cx.weave.works\",\"DEV_NAMESPACE\":\"app-podinfo-dev\",\"PRD_NAMESPACE\":\"app-podinfo-prd\",\"STG_NAMESPACE\":\"app-podinfo-stg\"},\"commit_message\":\"Create app-podinfo-chart-and-pipeline-devteam1 instance\",\"credentials\":{},\"template_namespace\":\"devteam1\",\"template_kind\":\"GitOpsTemplate\"}"
+spec:
+  interval: 10m0s
+  path: ./environments/sa-demo-pipeline/stg
+  postBuild:
+    substitute:
+      cluster_url: workload-cluster.devteam1.sa-demo.cx.weave.works
+      environment: stg
+      pipeline_name: app-podinfo-workload-cluster
+      pipeline_ns: devteam1
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: application-promotion-podinfo
+    namespace: devteam1
