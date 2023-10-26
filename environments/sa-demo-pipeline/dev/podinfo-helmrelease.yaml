@@ -5,4 +5,4 @@ metadata:
 spec:
   chart:
     spec:
-      version: x.x.x # {"$promotion": "devteam1:app-podinfo-dev-sandbox:dev"}
+      version: x.x.x # {"$promotion": "devteam1:app-podinfo-devteam1-pipeline:dev"}
