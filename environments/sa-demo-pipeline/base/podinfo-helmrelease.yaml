@@ -50,6 +50,10 @@ spec:
               pathType: Prefix
             - path: "/${environment:=dev}/(api/?.*)"
               pathType: Prefix
+      tls:
+        - secretName: podinfo-${environment:=dev}-tls
+          hosts:
+            - "podinfo-${environment:=dev}.${cluster_url}"
     replicaCount: 1
     ui:
       message: "Hi, this message is from the Helm values for ${environment:=dev}"
