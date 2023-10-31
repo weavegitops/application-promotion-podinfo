@@ -1,12 +1,6 @@
 #!/bin/bash
 
-echo "Here are links to Demo2 cluster environments for the podinfo app:"
-echo "dev - http://172.16.20.211/podinfo"
-echo "dev-test - http://172.16.20.212/podinfo"
-echo "uat - http://172.16.20.213/podinfo"
-echo "stg - http://172.16.20.214/podinfo"
-echo "prod - http://172.16.20.215/podinfo"
-echo "Open browser windows to each of these to show the progression during the demo."
+echo "This script automates the changes to the repo for creating a PR and release of a new Helm chart for a change in background colour"
 echo
 echo "Press a Key"
 echo
