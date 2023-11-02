@@ -5,4 +5,4 @@ metadata:
 spec:
   chart:
     spec:
-      version: 1.5.45 # {"$promotion": "devteam1:app-podinfo-devteam1-pipeline:prd"}
+      version: 1.5.46 # {"$promotion": "devteam1:app-podinfo-devteam1-pipeline:prd"}
